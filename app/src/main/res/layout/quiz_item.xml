@@ -27,13 +27,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="casual"
-                android:text="TextView"
+                android:text="RMA"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 tools:text="RMA" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/status"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_weight="1"
