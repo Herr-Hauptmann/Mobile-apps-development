@@ -35,7 +35,7 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
         holder.trajanje.text = kvizovi[position].trajanje.toString()
 
 
-        //implementirati datume i statuse
+        //TODO: implementirati datume i statuse
 //        if (Date().after(strDate)) {
 //            catalog_outdated = 1
 //        }

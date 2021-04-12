@@ -1,13 +1,12 @@
 package ba.etf.rma21.projekat.data.repositories
 
 import ba.etf.rma21.projekat.data.models.Grupa
-import ba.etf.rma21.projekat.data.models.Predmet
 
 class GrupaRepository {
     companion object {
-        var sveGrupe : List<Grupa>;
+        var sveGrupe : List<Grupa>
         init {
-            sveGrupe = kreirajGrupe();
+            sveGrupe = kreirajGrupe()
         }
 
         fun getGroupsByPredmet(nazivPredmeta: String): List<Grupa> {

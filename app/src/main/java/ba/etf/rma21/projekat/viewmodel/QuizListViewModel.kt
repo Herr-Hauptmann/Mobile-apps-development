@@ -5,11 +5,11 @@ import ba.etf.rma21.projekat.data.repositories.KvizRepository
 
 class QuizListViewModel {
     fun getSviKvizovi():List<Kviz>{
-        return KvizRepository.getMyKvizes();
+        return KvizRepository.getAll();
     }
     fun getMojiKvizovi():List<Kviz>
     {
-        return KvizRepository.getAll();
+        return KvizRepository.getMyKvizes();
     }
     fun getBuduciKvizovi() : List<Kviz>
     {

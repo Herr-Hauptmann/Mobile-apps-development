@@ -11,14 +11,15 @@ class KvizRepository {
     companion object {
         var kvizovi : MutableList<Kviz> = mutableListOf<Kviz>()
         init {
-            val brojKviza: Int = Random.nextInt()%5
-            val vrijemePocetka: Date = randomDatum(Date(2021, 4, 12), Date(2021, 5, 30))
-            val vrijemeKraja: Date = randomDatum(vrijemePocetka, Date(2021, 6, 30))
-            val trajanje: Int = Random.nextInt()%90
             for(grupa in GrupaRepository.sveGrupe)
             {
+                val brojKviza: Int = Random.nextInt()%5
+                val vrijemePocetka: Date = randomDatum(Date(2021, 4, 12), Date(2021, 5, 30))
+                val vrijemeKraja: Date = randomDatum(vrijemePocetka, Date(2021, 6, 30))
+                val trajanje: Int = Random.nextInt()%90
                 //TODO: Dodati logiku u kojoj su neki kvizovi radjeni
                 val kviz: Kviz = Kviz("Kviz $brojKviza", grupa.nazivPredmeta, vrijemePocetka, vrijemeKraja, null, trajanje, grupa.naziv, null)
+                kvizovi.add(kviz)
             }
         }
 
