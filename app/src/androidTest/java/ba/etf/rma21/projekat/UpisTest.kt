@@ -1,26 +1,26 @@
 package ba.etf.rma21.projekat
-//
-//import androidx.test.espresso.Espresso
-//import androidx.test.espresso.action.ViewActions
-//import androidx.test.espresso.intent.rule.IntentsTestRule
-//import androidx.test.espresso.matcher.ViewMatchers
-//import androidx.test.ext.junit.runners.AndroidJUnit4
-//import ba.etf.rma21.projekat.UtilTestClass.Companion.hasItemCount
-//import ba.etf.rma21.projekat.UtilTestClass.Companion.itemTest
-//import ba.etf.rma21.projekat.data.repositories.KvizRepository
-//import ba.etf.rma21.projekat.data.repositories.PredmetRepository
-//import org.hamcrest.CoreMatchers
-//import org.hamcrest.Matchers
-//import org.junit.Rule
-//import org.junit.Test
-//import org.junit.runner.RunWith
-//
-//@RunWith(AndroidJUnit4::class)
-//class UpisTest {
+
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.intent.rule.IntentsTestRule
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import ba.etf.rma21.projekat.UtilTestClass.Companion.hasItemCount
+import ba.etf.rma21.projekat.UtilTestClass.Companion.itemTest
+import ba.etf.rma21.projekat.data.repositories.KvizRepository
+import ba.etf.rma21.projekat.data.repositories.PredmetRepository
+import org.hamcrest.CoreMatchers
+import org.hamcrest.Matchers
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class UpisTest {
 //
 //    @get:Rule
 //    val intentsTestRule = IntentsTestRule<MainActivity>(MainActivity::class.java)
-//
+
 //    @Test
 //    fun upisTest() {
 //
@@ -106,4 +106,4 @@ package ba.etf.rma21.projekat
 //        )
 //
 //    }
-//}
+}

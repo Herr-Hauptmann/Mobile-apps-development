@@ -12,6 +12,5 @@ data class Kviz(
         if (this.datumPocetka > kviz.datumPocetka)
             return 1
         return 0
-
     }
 }
