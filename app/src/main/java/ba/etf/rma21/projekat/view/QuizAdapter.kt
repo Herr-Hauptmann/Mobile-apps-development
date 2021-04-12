@@ -1,5 +1,6 @@
 package ba.etf.rma21.projekat.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,11 +29,15 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
 //        val status : ImageView = itemView.findViewById(R.id.status)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {
         holder.nazivKviza.text = kvizovi[position].naziv
         holder.nazivPredmeta.text = kvizovi[position].nazivPredmeta
-        holder.datumKviza.text = kvizovi[position].datumPocetka.toString()
-        holder.trajanje.text = kvizovi[position].trajanje.toString()
+        val dan = kvizovi[position].datumPocetka.getDate()
+        val mjesec = kvizovi[position].datumPocetka.getMonth()
+        val godina = kvizovi[position].datumPocetka.getYear()
+        holder.datumKviza.text = "$dan.$mjesec.$godina"
+        holder.trajanje.text = kvizovi[position].trajanje.toString() + " min"
 
 
         //TODO: implementirati datume i statuse
