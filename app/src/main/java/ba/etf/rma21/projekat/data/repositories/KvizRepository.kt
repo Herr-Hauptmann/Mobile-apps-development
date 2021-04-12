@@ -30,7 +30,7 @@ class KvizRepository {
             var gotovi : MutableList<Kviz> = mutableListOf<Kviz>()
             for(kviz in kvizovi)
             {
-                if (kviz.datumKraj < getCurrentDateTime())
+                if (kviz.datumKraj < StaticKviz.getCurrentDateTime())
                     gotovi.add(kviz)
             }
             return gotovi.toList()
@@ -40,7 +40,7 @@ class KvizRepository {
             var buduci : MutableList<Kviz> = mutableListOf<Kviz>()
             for(kviz in kvizovi)
             {
-                if (kviz.datumPocetka > getCurrentDateTime())
+                if (kviz.datumPocetka > StaticKviz.getCurrentDateTime())
                     buduci.add(kviz)
             }
             return buduci.toList()
@@ -56,16 +56,6 @@ class KvizRepository {
             return nisuRadjeni.toList()
         }
 
-        fun randomDatum(poslije: Date, prije: Date): Date {
-            val startMillis: Long = poslije.getTime()
-            val endMillis: Long = prije.getTime()
-            val randomMillisSinceEpoch: Long = ThreadLocalRandom
-                .current()
-                .nextLong(startMillis, endMillis)
-            return Date(randomMillisSinceEpoch)
-        }
-        fun getCurrentDateTime(): Date {
-            return Calendar.getInstance().time
-        }
+
     }
 }
