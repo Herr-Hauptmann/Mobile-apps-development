@@ -19,4 +19,7 @@ class QuizListViewModel {
     {
         return KvizRepository.getNotTaken();
     }
+    fun getUradjeniKvizovi(): List<Kviz> {
+        return KvizRepository.getDone()
+    }
 }

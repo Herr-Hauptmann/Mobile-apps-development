@@ -30,8 +30,8 @@ class KvizRepository {
             var gotovi : MutableList<Kviz> = mutableListOf<Kviz>()
             for(kviz in kvizovi)
             {
-                if (kviz.datumKraj < StaticKviz.getCurrentDateTime())
-                    gotovi.add(kviz)
+               if (kviz.osvojeniBodovi != null)
+                   gotovi.add(kviz)
             }
             return gotovi.toList()
         }
@@ -50,7 +50,7 @@ class KvizRepository {
             var nisuRadjeni : MutableList<Kviz> = mutableListOf<Kviz>()
             for(kviz in kvizovi)
             {
-                if (kviz.datumRada == null)
+                if (kviz.datumRada == null && kviz.datumKraj < StaticKviz.getCurrentDateTime())
                     nisuRadjeni.add(kviz)
             }
             return nisuRadjeni.toList()
