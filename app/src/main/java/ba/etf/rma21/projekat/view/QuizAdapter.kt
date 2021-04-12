@@ -21,11 +21,11 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
 
     inner class QuizViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nazivPredmeta : TextView = itemView.findViewById(R.id.nazivPredmeta)
-        val nazivKviza : TextView = itemView.findViewById(R.id.nazivPredmeta)
-        val datumKviza : TextView = itemView.findViewById(R.id.nazivPredmeta)
-        val trajanje : TextView = itemView.findViewById(R.id.nazivPredmeta)
-        val osvojeniBodovi : TextView = itemView.findViewById(R.id.nazivPredmeta)
-        val status : ImageView = itemView.findViewById(R.id.status)
+        val nazivKviza : TextView = itemView.findViewById(R.id.nazivKviza)
+        val datumKviza : TextView = itemView.findViewById(R.id.datumKviza)
+        val trajanje : TextView = itemView.findViewById(R.id.trajanje)
+//        val osvojeniBodovi : TextView = itemView.findViewById(R.id.nazivPredmeta)
+//        val status : ImageView = itemView.findViewById(R.id.status)
     }
 
     override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {

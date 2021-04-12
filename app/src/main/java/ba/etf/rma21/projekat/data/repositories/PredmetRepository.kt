@@ -12,11 +12,10 @@ class PredmetRepository {
         }
 
         fun getAll(): List<Predmet> {
-            val p = StaticPredmeti();
             var predmeti : MutableList<Predmet> = emptyList<Predmet>().toMutableList()
             for (i in 1..3)
             {
-                predmeti.addAll(p.dajPredmete(i))
+                predmeti.addAll(StaticPredmeti.dajPredmete(i))
             }
             return predmeti.toList();
         }
