@@ -11,9 +11,10 @@ class StaticKviz {
         fun generisiKvizove() : List<Kviz>
         {
             var kvizovi : MutableList<Kviz> = mutableListOf<Kviz>()
+            var brojKviza = 1;
             for(grupa in GrupaRepository.sveGrupe)
             {
-                val brojKviza: Int = Random.nextInt()%5
+                brojKviza++
                 val vrijemePocetka: Date =
                     KvizRepository.randomDatum(Date(2021, 4, 12), Date(2021, 5, 30))
                 val vrijemeKraja: Date =
@@ -21,7 +22,9 @@ class StaticKviz {
                 val trajanje: Int = Random.nextInt()%90
                 //TODO: Dodati logiku u kojoj su neki kvizovi radjeni
                 val kviz: Kviz = Kviz("Kviz $brojKviza", grupa.nazivPredmeta, vrijemePocetka, vrijemeKraja, null, trajanje, grupa.naziv, null)
-                KvizRepository.kvizovi.add(kviz)
+                kvizovi.add(kviz)
+                if (brojKviza == 4)
+                    brojKviza = 0
             }
             return kvizovi.toList();
         }
