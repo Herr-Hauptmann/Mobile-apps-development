@@ -39,8 +39,7 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
         holder.datumKviza.text = "$dan.$mjesec.$godina"
         holder.trajanje.text = kvizovi[position].trajanje.toString() + " min"
 
-
-        //TODO: implementirati datume i statuse
+        //TODO: implementirati statuse
 //        if (Date().after(strDate)) {
 //            catalog_outdated = 1
 //        }
@@ -53,7 +52,7 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
 
     fun updateQuizes(kvizovi: List<Kviz>)
     {
-        this.kvizovi = kvizovi;
+        this.kvizovi = kvizovi.sorted();
         notifyDataSetChanged()
     }
 }
