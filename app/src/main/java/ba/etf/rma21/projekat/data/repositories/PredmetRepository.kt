@@ -19,6 +19,10 @@ class PredmetRepository {
             }
             return predmeti.toList();
         }
+
+        fun getPredmetsByGodina(godina:Int) : List<Predmet>{
+            return StaticPredmeti.dajPredmete(godina)
+        }
     }
 
 }

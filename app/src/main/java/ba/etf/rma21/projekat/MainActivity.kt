@@ -1,6 +1,6 @@
 package ba.etf.rma21.projekat
 
-import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ba.etf.rma21.projekat.view.QuizAdapter
 import ba.etf.rma21.projekat.viewmodel.QuizListViewModel
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var listaKvizova: RecyclerView
@@ -55,6 +56,12 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {
                 kvizAdapter.updateQuizes(kvizViewModel.getSviKvizovi())
             }
+        }
+
+        val fab: View = findViewById(R.id.upisDugme)
+        fab.setOnClickListener {
+            val intent: Intent = Intent(this, UpisPredmet::class.java)
+            startActivity(intent)
         }
 
     }
