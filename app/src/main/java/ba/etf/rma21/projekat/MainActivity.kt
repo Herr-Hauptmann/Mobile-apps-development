@@ -16,8 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         listaKvizova = findViewById(R.id.listaKvizova)
+        kvizAdapter = QuizAdapter((listOf()))
         listaKvizova.adapter = kvizAdapter
-
+        kvizAdapter.updateQuizes(kvizViewModel.getSviKvizovi())
     }
 }
 
