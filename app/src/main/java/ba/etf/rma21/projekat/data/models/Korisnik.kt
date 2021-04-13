@@ -6,7 +6,8 @@ object Korisnik{
     var godina:Int = 0
 
     init{
-
+        predmeti.add(Predmet("OE", 1))
+        grupe.add(Grupa("Grupa 1", "OE"))
     }
 
     fun dodajPredmet(predmet: Predmet){

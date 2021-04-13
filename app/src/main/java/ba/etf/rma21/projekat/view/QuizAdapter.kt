@@ -28,7 +28,7 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
         val nazivKviza : TextView = itemView.findViewById(R.id.nazivKviza)
         val datumKviza : TextView = itemView.findViewById(R.id.datumKviza)
         val trajanje : TextView = itemView.findViewById(R.id.trajanje)
-        val osvojeniBodovi : TextView = itemView.findViewById(R.id.nazivPredmeta)
+        val osvojeniBodovi : TextView = itemView.findViewById(R.id.osvojeniBodovi)
         val status : ImageView = itemView.findViewById(R.id.status)
     }
 
@@ -52,16 +52,19 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
         {
             datumZaPrikaz = kviz.datumKraj
             boja = "zelena"
+            holder.osvojeniBodovi.text=""
         }
         else if(kviz.datumKraj < danasnjiDatum)
         {
             datumZaPrikaz = kviz.datumKraj
             boja = "crvena"
+            holder.osvojeniBodovi.text=""
         }
         else
         {
             datumZaPrikaz = kviz.datumPocetka
             boja = "zuta"
+            holder.osvojeniBodovi.text=""
         }
 
         val dan = datumZaPrikaz!!.date
