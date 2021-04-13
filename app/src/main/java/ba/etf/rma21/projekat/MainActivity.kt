@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                kvizAdapter.updateQuizes(kvizViewModel.getSviKvizovi())
+                kvizAdapter.updateQuizes(kvizViewModel.getMojiKvizovi())
             }
         }
 
@@ -64,5 +64,21 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
+        }
+
+    override fun onResume() {
+        super.onResume()
+        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[0].toString())
+            kvizAdapter.updateQuizes(kvizViewModel.getMojiKvizovi())
+        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[1].toString())
+            kvizAdapter.updateQuizes(kvizViewModel.getSviKvizovi())
+        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[2].toString())
+            kvizAdapter.updateQuizes(kvizViewModel.getUradjeniKvizovi())
+        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[3].toString())
+            kvizAdapter.updateQuizes(kvizViewModel.getBuduciKvizovi())
+        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[4].toString())
+            kvizAdapter.updateQuizes(kvizViewModel.getNeuradjeniKvizovi())
     }
 }
