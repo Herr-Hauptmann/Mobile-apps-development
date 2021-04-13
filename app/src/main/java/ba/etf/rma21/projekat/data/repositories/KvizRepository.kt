@@ -1,5 +1,6 @@
 package ba.etf.rma21.projekat.data.repositories
 
+import ba.etf.rma21.projekat.data.models.Grupa
 import ba.etf.rma21.projekat.data.models.Korisnik
 import ba.etf.rma21.projekat.data.models.Kviz
 import ba.etf.rma21.projekat.data.staticData.StaticKviz
@@ -16,7 +17,7 @@ class KvizRepository {
             var mojiKvizovi : MutableList<Kviz> = mutableListOf<Kviz>()
             for(kviz in kvizovi)
             {
-                if (kviz.nazivGrupe.equals(Korisnik.grupa?.naziv))
+                if (Korisnik.grupe.contains(Grupa(kviz.nazivGrupe, kviz.nazivPredmeta)))
                     mojiKvizovi.add(kviz)
             }
             return mojiKvizovi.toList()

@@ -2,8 +2,8 @@ package ba.etf.rma21.projekat.data.models
 
 object Korisnik{
     var predmeti : MutableList<Predmet> = mutableListOf<Predmet>()
+    var grupe: MutableList<Grupa> = mutableListOf<Grupa>();
     var godina:Int = 0
-    var grupa: Grupa? = null;
 
     init{
 

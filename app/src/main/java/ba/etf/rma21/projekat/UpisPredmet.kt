@@ -31,8 +31,9 @@ class UpisPredmet : AppCompatActivity() {
         odabirGrupe = findViewById(R.id.odabirGrupa)
         dugme = findViewById(R.id.dodajPredmetDugme)
 
-        val predmet: Predmet? = null
-        val grupeGlobal : List<Grupa>? = null
+        var godina: Int? = null
+        var predmet: Predmet? = null
+        var grupa : Grupa? = null
         ArrayAdapter.createFromResource(
             this,
             R.array.godine,
@@ -46,12 +47,14 @@ class UpisPredmet : AppCompatActivity() {
         odabirGodine.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 if (position != 0){
+                    godina = position
                     Korisnik.godina = position
                     val predmeti = PredmetRepository.getPredmetsByGodina(Korisnik.godina)
-                    predmeti.toMutableList().removeAll(Korisnik.predmeti)
                     val stringovi = emptyList<String>().toMutableList()
+                    stringovi.add("")
                     for(predmet in predmeti)
-                        stringovi.add(predmet.naziv)
+                        if (!Korisnik.predmeti.contains(Predmet(predmet.naziv, predmet.godina)))
+                            stringovi.add(predmet.naziv)
                     popuniSpinner(odabirPredmeta, stringovi)
                     odabirPredmeta.isEnabled = true
                     odabirGrupe.isEnabled = false
@@ -64,25 +67,53 @@ class UpisPredmet : AppCompatActivity() {
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                //Ne treba nista
+                odabirPredmeta.isEnabled=false
+                odabirGrupe.isEnabled=false
+                dugme.isEnabled=false
             }
 
         }
 
         odabirPredmeta.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val predmet = odabirPredmeta.selectedItem
-                val grupe = GrupaRepository.getGroupsByPredmet(predmet as String)
-                val stringovi = emptyList<String>().toMutableList()
-                for (grupa in grupe)
-                    stringovi.add(grupa.naziv)
-                popuniSpinner(odabirGrupe, stringovi)
-                odabirGrupe.isEnabled = true
+                if (position != 0){
+                    val nazivPredmeta: String = odabirPredmeta.selectedItem.toString()
+                    predmet = Predmet(nazivPredmeta, godina!!)
+                    val grupe = GrupaRepository.getGroupsByPredmet(nazivPredmeta)
+                    val stringovi = emptyList<String>().toMutableList()
+                    stringovi.add("")
+                    for (grupa in grupe)
+                        stringovi.add(grupa.naziv)
+                    popuniSpinner(odabirGrupe, stringovi)
+                    odabirGrupe.isEnabled = true
+                }
+
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                //Ne treba nista
+                odabirGrupe.isEnabled=false
+                dugme.isEnabled=false
             }
         }
+
+        odabirGrupe.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                if (position!=0) {
+                    grupa = Grupa(odabirGrupe.selectedItem.toString(), predmet!!.naziv)
+                    dugme.isEnabled = true
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                dugme.isEnabled=false
+            }
+        }
+
+        dugme.setOnClickListener {
+            Korisnik.predmeti.add(predmet!!)
+            Korisnik.grupe.add(grupa!!)
+            finish()
+        }
+
 
         odabirPredmeta.isEnabled = false
         odabirGrupe.isEnabled = false
