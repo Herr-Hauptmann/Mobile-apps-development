@@ -51,7 +51,7 @@ class UpisPredmet : AppCompatActivity() {
                     Korisnik.godina = position
                     val predmeti = PredmetRepository.getPredmetsByGodina(Korisnik.godina)
                     val stringovi = emptyList<String>().toMutableList()
-                    stringovi.add("")
+                    stringovi.add(getString(R.string.predmetSpinner))
                     for(predmet in predmeti)
                         if (!Korisnik.predmeti.contains(Predmet(predmet.naziv, predmet.godina)))
                             stringovi.add(predmet.naziv)
@@ -81,12 +81,18 @@ class UpisPredmet : AppCompatActivity() {
                     predmet = Predmet(nazivPredmeta, godina!!)
                     val grupe = GrupaRepository.getGroupsByPredmet(nazivPredmeta)
                     val stringovi = emptyList<String>().toMutableList()
-                    stringovi.add("")
+                    stringovi.add(getString(R.string.grupaSpinner))
                     for (grupa in grupe)
                         stringovi.add(grupa.naziv)
                     popuniSpinner(odabirGrupe, stringovi)
                     odabirGrupe.isEnabled = true
                 }
+                else
+                {
+                    odabirGrupe.isEnabled = false
+                    dugme.isEnabled = false
+                }
+
 
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {

@@ -25,23 +25,23 @@ class StaticPredmeti {
                 return listOf(
                     Predmet("OIS", 3),
                     Predmet("WT", 3),
-                    Predmet("RG", 3)
+                    Predmet("OOI", 3)
                 )
             }
 
             if (godina == 4) {
                 return listOf(
-                    Predmet("RV", 3),
-                    Predmet("MU", 3),
-                    Predmet("NASP", 3)
+                    Predmet("RV", 4),
+                    Predmet("MU", 4),
+                    Predmet("NASP", 4)
                 )
             }
 
             if (godina == 5) {
                 return listOf(
-                    Predmet("MPVI", 3),
-                    Predmet("NSI", 3),
-                    Predmet("TS", 3)
+                    Predmet("MPVI", 5),
+                    Predmet("NSI", 5),
+                    Predmet("NBP", 5)
                 )
             }
             return emptyList()

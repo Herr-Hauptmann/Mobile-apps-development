@@ -13,7 +13,7 @@ class PredmetRepository {
 
         fun getAll(): List<Predmet> {
             var predmeti : MutableList<Predmet> = emptyList<Predmet>().toMutableList()
-            for (i in 1..3)
+            for (i in 1..5)
             {
                 predmeti.addAll(StaticPredmeti.dajPredmete(i))
             }
