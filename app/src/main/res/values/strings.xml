@@ -2,6 +2,8 @@
     <string name="app_name">"RMA '21 Projekat"</string>
     <string name="predmetSpinner">"Odaberi predmet"</string>
     <string name="grupaSpinner">"Odaberi grupu"</string>
+    <string name="navPredmeti">Predmeti</string>
+    <string name="navKvizovi">Kvizovi</string>
     <string-array name="spinnerOpcije">
         <item>Svi moji kvizovi</item>
         <item>Svi kvizovi</item>
