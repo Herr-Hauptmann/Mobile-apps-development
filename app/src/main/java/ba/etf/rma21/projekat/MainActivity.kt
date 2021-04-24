@@ -19,21 +19,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNav : BottomNavigationView
-    val fragmentKvizovi = FragmentKvizovi()
-//    val fragmentPredmeti = FragmentPredmeti()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        odaberiTrenutniFragment(fragmentKvizovi)
+        odaberiTrenutniFragment(FragmentKvizovi())
+        bottomNav = findViewById(R.id.bottomNav)
 
-//        bottomNav.setOnNavigationItemSelectedListener {
-//            when (it.itemId) {
-////                R.id.kvizovi -> odaberiTrenutniFragment(fragmentKvizovi)
-////                R.id.predmeti -> odaberiTrenutniFragment(fragmentPredmeti)
-//            }
-//            true
-//        }
+        bottomNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.kvizovi -> odaberiTrenutniFragment(FragmentKvizovi())
+                R.id.predmeti -> odaberiTrenutniFragment(FragmentPredmeti())
+            }
+            true
+        }
 
     }
 
@@ -42,22 +41,5 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragment, fragment)
             commit()
         }
-
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[0].toString())
-//            kvizAdapter.updateQuizes(kvizViewModel.getMojiKvizovi())
-//        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[1].toString())
-//            kvizAdapter.updateQuizes(kvizViewModel.getSviKvizovi())
-//        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[2].toString())
-//            kvizAdapter.updateQuizes(kvizViewModel.getUradjeniKvizovi())
-//        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[3].toString())
-//            kvizAdapter.updateQuizes(kvizViewModel.getBuduciKvizovi())
-//        if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[4].toString())
-//            kvizAdapter.updateQuizes(kvizViewModel.getNeuradjeniKvizovi())
-//    }
-
-
 }
