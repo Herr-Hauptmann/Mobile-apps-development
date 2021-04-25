@@ -1,7 +1,6 @@
 package ba.etf.rma21.projekat.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ba.etf.rma21.projekat.IOnBackPressed
 import ba.etf.rma21.projekat.MainActivity
 import ba.etf.rma21.projekat.R
 import ba.etf.rma21.projekat.view.QuizAdapter
@@ -34,7 +32,6 @@ class FragmentKvizovi : Fragment() {
             override fun handleOnBackPressed() {
                 (context as MainActivity).odaberiTrenutniFragment(FragmentPredmeti())
             }
-
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
