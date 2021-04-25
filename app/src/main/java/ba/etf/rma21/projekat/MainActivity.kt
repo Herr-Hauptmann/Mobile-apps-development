@@ -36,10 +36,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun odaberiTrenutniFragment(fragment: Fragment) {
+    public fun odaberiTrenutniFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply{
             replace(R.id.fragment, fragment)
             commit()
         }
     }
+
 }

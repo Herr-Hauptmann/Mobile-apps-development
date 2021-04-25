@@ -8,13 +8,16 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import ba.etf.rma21.projekat.MainActivity
 import ba.etf.rma21.projekat.R
 import ba.etf.rma21.projekat.data.models.Grupa
 import ba.etf.rma21.projekat.data.models.Korisnik
 import ba.etf.rma21.projekat.data.models.Predmet
 import ba.etf.rma21.projekat.data.repositories.GrupaRepository
 import ba.etf.rma21.projekat.data.repositories.PredmetRepository
+
 
 class FragmentPredmeti : Fragment() {
     private lateinit var odabirGodine: Spinner
@@ -26,6 +29,14 @@ class FragmentPredmeti : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_predmeti, container, false)
+
+        val callback = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                (context as MainActivity).odaberiTrenutniFragment(FragmentKvizovi())
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         odabirGodine = view.findViewById(R.id.odabirGodina)
         odabirPredmeta = view.findViewById(R.id.odabirPredmet)
@@ -120,6 +131,7 @@ class FragmentPredmeti : Fragment() {
         dugme.setOnClickListener {
             Korisnik.predmeti.add(predmet!!)
             Korisnik.grupe.add(grupa!!)
+            (context as MainActivity).odaberiTrenutniFragment(FragmentKvizovi())
         }
 
         odabirPredmeta.isEnabled = false
@@ -142,5 +154,6 @@ class FragmentPredmeti : Fragment() {
             }
         }
     }
+
 
 }
