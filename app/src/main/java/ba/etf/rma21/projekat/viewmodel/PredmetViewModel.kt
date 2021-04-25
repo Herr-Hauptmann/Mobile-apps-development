@@ -14,6 +14,13 @@ class PredmetViewModel : ViewModel() {
         MutableLiveData<Int>(0)
     }
 
+    val posljednjiPredmet : MutableLiveData<String> by lazy{
+        MutableLiveData<String>()
+    }
+    val posljednjaGrupa : MutableLiveData<String> by lazy{
+        MutableLiveData<String>()
+    }
+
     fun postaviGodinu(godina:Int){
         trenutnaGodina.value = godina
     }
@@ -24,7 +31,9 @@ class PredmetViewModel : ViewModel() {
         trenutnaGrupa.value = grupa
     }
 
-    fun restart(){
+    fun restart(predmet: String, grupa:String){
+        posljednjaGrupa.value = grupa
+        posljednjiPredmet.value = predmet
         trenutnaGrupa.value = 0
         trenutniPredmet.value = 0
     }

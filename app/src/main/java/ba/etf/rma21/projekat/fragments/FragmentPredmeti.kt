@@ -154,10 +154,10 @@ class FragmentPredmeti : Fragment() {
         }
 
         dugme.setOnClickListener{
-            model.restart()
+            model.restart(predmet!!.naziv, grupa!!.naziv)
             Korisnik.predmeti.add(predmet!!)
             Korisnik.grupe.add(grupa!!)
-            (context as MainActivity).odaberiTrenutniFragment(FragmentKvizovi())
+            (context as MainActivity).odaberiTrenutniFragment(FragmentPoruka())
         }
     }
 

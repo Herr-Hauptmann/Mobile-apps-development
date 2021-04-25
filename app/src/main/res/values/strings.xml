@@ -19,4 +19,5 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+    <string name="greska">Doslo je do greške!</string>
 </resources>
