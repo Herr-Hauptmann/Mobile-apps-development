@@ -30,7 +30,7 @@ class FragmentKvizovi : Fragment() {
 
         val callback = object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
-                (context as MainActivity).odaberiTrenutniFragment(FragmentPredmeti())
+                (context as MainActivity).odaberiTrenutniFragment(FragmentKvizovi())
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
