@@ -1,6 +1,10 @@
 package ba.etf.rma21.projekat
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
+import android.widget.ListView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.NoMatchingViewException
@@ -11,6 +15,8 @@ import ba.etf.rma21.projekat.data.models.Kviz
 import junit.framework.Assert
 import junit.framework.Assert.assertTrue
 import org.hamcrest.CoreMatchers
+import org.hamcrest.Description
+import org.hamcrest.TypeSafeMatcher
 
 class UtilTestClass {
     companion object{
@@ -39,6 +45,30 @@ class UtilTestClass {
                     )
                 )
             )
+        }
+        fun withTextColor(trazenaBoja: Int) = object:TypeSafeMatcher<View>(){
+            override fun describeTo(description: Description) {
+                description.appendText("Nema tekst zelene boje")
+            }
+
+            override fun matchesSafely(item: View): Boolean {
+                if(!(item is TextView)) return false;
+                return item.currentTextColor== trazenaBoja
+
+            }
+
+        }
+        fun withBackground(trazenaBoja:Int) = object:TypeSafeMatcher<View>(){
+            override fun describeTo(description: Description) {
+                description.appendText("Nema pozadinu zelene boje")
+            }
+
+            override fun matchesSafely(item: View): Boolean {
+                if(!(item.background is ColorDrawable)) return false;
+                var boja = item.background as ColorDrawable
+                return boja.color==trazenaBoja
+            }
+
         }
     }
 }

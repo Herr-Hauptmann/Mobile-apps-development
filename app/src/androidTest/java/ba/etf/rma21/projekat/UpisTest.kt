@@ -103,5 +103,6 @@ class UpisTest {
             kvizoviPrijeSize,
             CoreMatchers.`is`(Matchers.lessThan(kvizoviPoslije.size))
         )
+
     }
 }
