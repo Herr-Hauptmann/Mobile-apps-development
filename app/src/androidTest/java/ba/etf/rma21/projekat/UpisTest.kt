@@ -1,3 +1,4 @@
+@file:Suppress("PackageDirectoryMismatch")
 package ba.etf.rma21.projekat
 
 import androidx.test.espresso.Espresso
@@ -11,10 +12,14 @@ import ba.etf.rma21.projekat.data.repositories.KvizRepository
 import ba.etf.rma21.projekat.data.repositories.PredmetRepository
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
+import org.junit.FixMethodOrder
 import org.junit.Rule
 import org.junit.Test
+import org.junit.internal.MethodSorter
 import org.junit.runner.RunWith
+import org.junit.runners.MethodSorters
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4::class)
 class UpisTest {
 
@@ -22,7 +27,7 @@ class UpisTest {
     val intentsTestRule = IntentsTestRule<MainActivity>(MainActivity::class.java)
 
     @Test
-    fun upisTest() {
+    fun A_upisTest() {
 
         Espresso.onView(ViewMatchers.withId(R.id.filterKvizova)).perform(ViewActions.click())
         Espresso.onData(
@@ -105,5 +110,10 @@ class UpisTest {
             CoreMatchers.`is`(Matchers.lessThan(kvizoviPoslije.size))
         )
 
+    }
+
+    @Test
+    fun B_upisTest(){
+        A_upisTest()
     }
 }

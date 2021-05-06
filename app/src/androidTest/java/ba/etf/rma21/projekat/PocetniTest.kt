@@ -1,16 +1,23 @@
+@file:Suppress("PackageDirectoryMismatch")
 package ba.etf.rma21.projekat
 
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import ba.etf.rma21.projekat.UtilTestClass.Companion.hasItemCount
 import ba.etf.rma21.projekat.UtilTestClass.Companion.itemTest
+import ba.etf.rma21.projekat.UtilTestClass.Companion.itemTestNotVisited
+import ba.etf.rma21.projekat.data.models.Kviz
 import ba.etf.rma21.projekat.data.repositories.KvizRepository
+import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.*
+import org.hamcrest.Matchers.greaterThan
 import org.hamcrest.CoreMatchers.`is` as Is
 import org.junit.Rule
 import org.junit.Test
@@ -65,6 +72,39 @@ class PocetniTest {
             onView(withId(R.id.odabirGodina)).perform(click())
             onData(allOf(Is(instanceOf(String::class.java)), Is(odabir))).perform(click())
         }
+    }
+
+    @Test
+    fun filtriranjeTest(){
+        var listaOdabira = listOf<String>(
+            "Svi moji kvizovi",
+            "Svi kvizovi",
+            "Urađeni kvizovi",
+            "Budući kvizovi",
+            "Prošli kvizovi"
+        )
+        var kolikoKvizova = 0
+        for (odabir in listaOdabira) {
+            onView(withId(R.id.filterKvizova)).perform(click())
+            onData(allOf(Is(instanceOf(String::class.java)), Is(odabir))).perform(click())
+            var kvizovi = emptyList<Kviz>()
+            when(odabir){
+                "Svi moji kvizovi" -> kvizovi=KvizRepository.getMyKvizes()
+                "Svi kvizovi" -> kvizovi=KvizRepository.getAll()
+                "Urađeni kvizovi" -> kvizovi=KvizRepository.getDone()
+                "Budući kvizovi" -> kvizovi=KvizRepository.getFuture()
+                "Prošli kvizovi" -> kvizovi=KvizRepository.getNotTaken()
+            }
+            kolikoKvizova+=kvizovi.size
+            onView(withId(R.id.listaKvizova)).check(hasItemCount(kvizovi.size))
+            var posjeceni:MutableList<Int> = mutableListOf()
+            for (kviz in kvizovi) {
+                itemTestNotVisited(R.id.listaKvizova, kviz,posjeceni)
+            }
+        }
+        val ukupno = KvizRepository.getAll().size
+        kolikoKvizova-=ukupno
+        assertThat(kolikoKvizova, allOf(Is(greaterThan(0))))
     }
 
 }
