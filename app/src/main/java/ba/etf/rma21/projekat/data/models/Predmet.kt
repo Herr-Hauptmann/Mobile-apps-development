@@ -1,6 +1,11 @@
 package ba.etf.rma21.projekat.data.models
 
-data class Predmet(val naziv: String, val godina: Int) {
+import com.google.gson.annotations.SerializedName
+
+data class Predmet(
+    @SerializedName("id") val id : Long,
+    @SerializedName("naziv") val naziv: String,
+    @SerializedName("godina") val godina: Int) {
     override operator fun equals(other: Any?): Boolean {
         if (other == null)
             return false;
