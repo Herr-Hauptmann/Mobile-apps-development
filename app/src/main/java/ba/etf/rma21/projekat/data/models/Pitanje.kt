@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 data class Pitanje(
-    @SerializedName("id") var id : Long,
+    @SerializedName("id") var id : Int,
     @SerializedName("naziv") var naziv : String,
     @SerializedName("tekstPitanja") var tekstPitanja : String,
     @SerializedName("opcije") val opcije: List<String>,

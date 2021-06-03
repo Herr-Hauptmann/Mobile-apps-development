@@ -51,21 +51,21 @@ class RepositoryUnitTest {
         assertThat(grupe,CoreMatchers.notNullValue())
         assertThat(grupe?.size,CoreMatchers.equalTo(4))
     }
-//    @Test
-//    fun a3_getUpisaneGrupe() = runBlocking {
-//        var upisane = PredmetIGrupaRepository.getUpisaneGrupe()
-//        assertThat(upisane?.size,CoreMatchers.equalTo(0))
-//    }
-//
-//    @Test
-//    fun a4_upisiIProvjeri() = runBlocking {
-//        var grupe = PredmetIGrupaRepository.getGrupe()
-//        PredmetIGrupaRepository.upisiUGrupu(grupe!![0]?.id)
-//        var upisane = PredmetIGrupaRepository.getUpisaneGrupe()
-//        assertThat(upisane?.size,CoreMatchers.equalTo(1))
-//        assertThat(upisane?.intersect(grupe)?.size,CoreMatchers.equalTo(1))
-//    }
-//
+    @Test
+    fun a3_getUpisaneGrupe() = runBlocking {
+        var upisane = PredmetIGrupaRepository.getUpisaneGrupe()
+        assertThat(upisane?.size,CoreMatchers.equalTo(0))
+    }
+
+    @Test
+    fun a4_upisiIProvjeri() = runBlocking {
+        var grupe = PredmetIGrupaRepository.getGrupe()
+        PredmetIGrupaRepository.upisiUGrupu(grupe!![0]?.id)
+        var upisane = PredmetIGrupaRepository.getUpisaneGrupe()
+        assertThat(upisane?.size,CoreMatchers.equalTo(1))
+        assertThat(upisane?.intersect(grupe)?.size,CoreMatchers.equalTo(1))
+    }
+
 //    @Test
 //    fun a5_zapocniUpisaniKviz() = runBlocking {
 //        var upisaniKvizovi = KvizRepository.getUpisani()
@@ -109,7 +109,7 @@ class RepositoryUnitTest {
 //        assertThat(pitanja,CoreMatchers.notNullValue())
 //        assertThat(pitanja!!.size,CoreMatchers.equalTo(2))
 //    }
-//
+
     fun checkProperties(propA:Collection<String>,propB:Collection<String>){
         for(trazeniProperty in propA){
             assertThat(propB,hasItem(trazeniProperty))

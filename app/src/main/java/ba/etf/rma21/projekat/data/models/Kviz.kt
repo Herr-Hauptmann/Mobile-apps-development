@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class Kviz(
-    @SerializedName("id") val id : Long,
+    @SerializedName("id") val id : Int,
     @SerializedName("naziv") var naziv: String,
     @SerializedName("datumPocetka") var datumPocetka: Date,
     @SerializedName("datumKraj") var datumKraj: Date,

@@ -2,6 +2,7 @@ package ba.etf.rma21.projekat.data.repositories
 
 object AccountRepository{
     var acHash : String = "8861bc6f-c600-4d3a-93e8-fd12ef85c979"
+    var id : Int = 105
 
     fun postaviHash(acHash:String):Boolean{
         this.acHash = acHash;
