@@ -66,22 +66,22 @@ class RepositoryUnitTest {
         assertThat(upisane?.intersect(grupe)?.size,CoreMatchers.equalTo(1))
     }
 
-//    @Test
-//    fun a5_zapocniUpisaniKviz() = runBlocking {
-//        var upisaniKvizovi = KvizRepository.getUpisani()
-//        var prije = TakeKvizRepository.getPocetiKvizovi()
-//        TakeKvizRepository.zapocniKviz(upisaniKvizovi!![0]?.id)
-//        var poslije = TakeKvizRepository.getPocetiKvizovi()
-//        assertThat(prije,CoreMatchers.`is`(CoreMatchers.nullValue()))
-//        assertThat(poslije!!.size,CoreMatchers.equalTo(1))
-//    }
-//
-//    @Test
-//    fun a6_zapocniNemoguciKviz() = runBlocking {
-//        TakeKvizRepository.zapocniKviz(999)
-//        assertThat(TakeKvizRepository.getPocetiKvizovi()!!.size,CoreMatchers.equalTo(1))
-//    }
-//
+    @Test
+    fun a5_zapocniUpisaniKviz() = runBlocking {
+        var upisaniKvizovi = KvizRepository.getUpisani()
+        var prije = TakeKvizRepository.getPocetiKvizovi()
+        TakeKvizRepository.zapocniKviz(upisaniKvizovi!![0]?.id)
+        var poslije = TakeKvizRepository.getPocetiKvizovi()
+        assertThat(prije,CoreMatchers.`is`(CoreMatchers.nullValue()))
+        assertThat(poslije!!.size,CoreMatchers.equalTo(1))
+    }
+
+    @Test
+    fun a6_zapocniNemoguciKviz() = runBlocking {
+        TakeKvizRepository.zapocniKviz(999)
+        assertThat(TakeKvizRepository.getPocetiKvizovi()!!.size,CoreMatchers.equalTo(1))
+    }
+
 //    @Test
 //    fun a7_provjeriBezOdgovora() = runBlocking {
 //        var poceti = TakeKvizRepository.getPocetiKvizovi()
