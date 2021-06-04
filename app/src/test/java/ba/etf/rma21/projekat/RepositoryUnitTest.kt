@@ -82,33 +82,33 @@ class RepositoryUnitTest {
         assertThat(TakeKvizRepository.getPocetiKvizovi()!!.size,CoreMatchers.equalTo(1))
     }
 
-//    @Test
-//    fun a7_provjeriBezOdgovora() = runBlocking {
-//        var poceti = TakeKvizRepository.getPocetiKvizovi()
-//        assertThat(OdgovorRepository.getOdgovoriKviz(poceti!![poceti.size-1]?.KvizId)!!.size,CoreMatchers.equalTo(0))
-//    }
-//    @Test
-//    fun a8_provjeriOdgovor() = runBlocking {
-//        var poceti = TakeKvizRepository.getPocetiKvizovi()
-//        var pitanja = PitanjeKvizRepository.getPitanja(poceti!![poceti.size-1]?.KvizId)
-//        var result = OdgovorRepository.postaviOdgovorKviz(poceti!![poceti.size-1]?.id,pitanja!![0]?.id,pitanja!![0]?.tacan)
-//        assertThat(result,CoreMatchers.notNullValue())
-//        assertThat(result,CoreMatchers.equalTo(50))
-//        assertThat(OdgovorRepository.getOdgovoriKviz(poceti!![poceti.size-1]?.KvizId)!!.size,CoreMatchers.equalTo(1))
-//    }
-//    @Test
-//    fun a9_provjeriKvizove() = runBlocking {
-//        assertThat(KvizRepository.getAll()!!.size,CoreMatchers.equalTo(3))
-//    }
-//
-//    @Test
-//    fun a9a_provjeriPitanja() = runBlocking {
-//        var kvizovi = KvizRepository.getAll()
-//        assertThat(kvizovi,CoreMatchers.notNullValue())
-//        var pitanja = PitanjeKvizRepository.getPitanja(kvizovi!![0]?.id)
-//        assertThat(pitanja,CoreMatchers.notNullValue())
-//        assertThat(pitanja!!.size,CoreMatchers.equalTo(2))
-//    }
+    @Test
+    fun a7_provjeriBezOdgovora() = runBlocking {
+        var poceti = TakeKvizRepository.getPocetiKvizovi()
+        assertThat(OdgovorRepository.getOdgovoriKviz(poceti!![poceti.size-1]?.KvizId)!!.size,CoreMatchers.equalTo(0))
+    }
+    @Test
+    fun a8_provjeriOdgovor() = runBlocking {
+        var poceti = TakeKvizRepository.getPocetiKvizovi()
+        var pitanja = PitanjeKvizRepository.getPitanja(poceti!![poceti.size-1]?.KvizId)
+        var result = OdgovorRepository.postaviOdgovorKviz(poceti!![poceti.size-1]?.id,pitanja!![0]?.id,pitanja!![0]?.tacan)
+        assertThat(result,CoreMatchers.notNullValue())
+        assertThat(result,CoreMatchers.equalTo(50))
+        assertThat(OdgovorRepository.getOdgovoriKviz(poceti!![poceti.size-1]?.KvizId)!!.size,CoreMatchers.equalTo(1))
+    }
+    @Test
+    fun a9_provjeriKvizove() = runBlocking {
+        assertThat(KvizRepository.getAll()!!.size,CoreMatchers.equalTo(3))
+    }
+
+    @Test
+    fun a9a_provjeriPitanja() = runBlocking {
+        var kvizovi = KvizRepository.getAll()
+        assertThat(kvizovi,CoreMatchers.notNullValue())
+        var pitanja = PitanjeKvizRepository.getPitanja(kvizovi!![0]?.id)
+        assertThat(pitanja,CoreMatchers.notNullValue())
+        assertThat(pitanja!!.size,CoreMatchers.equalTo(2))
+    }
 
     fun checkProperties(propA:Collection<String>,propB:Collection<String>){
         for(trazeniProperty in propA){
@@ -141,5 +141,4 @@ class RepositoryUnitTest {
         var odgovorTProperties = listOf("id","odgovoreno")
         checkProperties(odgovorTProperties,odgovorProperties)
     }
-
 }

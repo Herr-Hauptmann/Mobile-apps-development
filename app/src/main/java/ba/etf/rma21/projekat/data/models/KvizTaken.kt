@@ -7,6 +7,7 @@ data class KvizTaken(
     @SerializedName("id") var id : Int,
     @SerializedName("student") var student : String,
     @SerializedName("datumRada") var datumRada : Date,
-    @SerializedName("osvojeniBodovi") var osvojeniBodovi : Int
+    @SerializedName("osvojeniBodovi") var osvojeniBodovi : Int,
+    @SerializedName("KvizId") var KvizId : Int
 ) {
 }

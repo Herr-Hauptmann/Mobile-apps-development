@@ -3,9 +3,7 @@ package ba.etf.rma21.projekat.data.repositories
 import ba.etf.rma21.projekat.data.models.*
 import ba.etf.rma21.projekat.data.repositories.AccountRepository.getHash
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface Api {
     //PREDMETI
@@ -38,4 +36,19 @@ interface Api {
     : Response<KvizTaken>
     @GET("/student/{id}/kviztaken")
     suspend fun dajPokusaje(@Path("id") id : String = getHash()) : Response<List<KvizTaken>>
+
+    //ODGOVORI
+    @GET("/student/{id}/kviztaken/{ktid}/odgovori")
+    suspend fun dajOdgovore(@Path("ktid") ktid:Int, @Path("id") id : String = getHash()) : Response<List<Odgovor>>
+    @FormUrlEncoded
+    @POST("/student/{id}/kviztaken/{ktid}/odgovor")
+    suspend fun unesiOdgovor(@Path("ktid") ktid: Int,
+                             @Field("odgovor") odgovor : Int,
+                             @Field("pitanje") pitanjeId : Int,
+                             @Field("bodovi") bodovi : Int,
+                             @Path("id") id : String = getHash()) : Response<OdgovorPoruka>
+
+    //PITANJA
+    @GET("/kviz/{id}/pitanja")
+    suspend fun dajPitanja(@Path("id") id : Int) : Response<List<Pitanje>>
 }
