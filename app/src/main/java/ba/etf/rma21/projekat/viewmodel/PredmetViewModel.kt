@@ -54,4 +54,14 @@ class PredmetViewModel : ViewModel() {
         }
     }
 
+    fun getPredmetWithId(predmetId : Int, onSuccess: (predmet : Predmet ) -> Unit, onError: () -> Unit){
+        scope.launch{
+            when (val result = PredmetIGrupaRepository.getPredmetById(predmetId)) {
+                else -> onSuccess.invoke(result)
+            }
+        }
+    }
+
+
+
 }

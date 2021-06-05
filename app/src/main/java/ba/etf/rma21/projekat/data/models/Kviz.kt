@@ -8,7 +8,8 @@ data class Kviz(
     @SerializedName("naziv") var naziv: String,
     @SerializedName("datumPocetka") var datumPocetka: Date,
     @SerializedName("datumKraj") var datumKraj: Date,
-    @SerializedName("trajanje") var trajanje: Int
+    @SerializedName("trajanje") var trajanje: Int,
+    @SerializedName("predmetId") var predmetId: Int
 ) : Comparable<Kviz>{
     override fun compareTo(kviz:Kviz): Int {
         if (this.datumPocetka < kviz.datumPocetka)

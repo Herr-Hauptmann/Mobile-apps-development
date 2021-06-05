@@ -2,39 +2,59 @@ package ba.etf.rma21.projekat.data.repositories
 
 import ba.etf.rma21.projekat.data.models.Grupa
 import ba.etf.rma21.projekat.data.models.Predmet
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 object PredmetIGrupaRepository {
     suspend fun getPredmeti():List<Predmet>{
-        var response = ApiAdapter.retrofit.getPredmeti()
-        val responseBody = response.body()
-        return responseBody!!
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.getPredmeti()
+            val responseBody = response.body()
+            return@withContext responseBody!!
+        }
+    }
+
+    suspend fun getPredmetById(id : Int):Predmet{
+        return withContext(Dispatchers.IO) {
+            val response = ApiAdapter.retrofit.getPredmet(id)
+            val responseBody = response.body()
+            return@withContext responseBody!!
+        }
     }
 
     suspend fun getGrupe():List<Grupa>{
-        var response = ApiAdapter.retrofit.getGrupe()
-        val responseBody = response.body()
-        return responseBody!!
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.getGrupe()
+            val responseBody = response.body()
+            return@withContext responseBody!!
+        }
     }
 
     suspend fun getGrupeZaPredmet(idPredmeta:Int):List<Grupa>{
-        var response = ApiAdapter.retrofit.getGrupeZaPredmet(idPredmeta)
-        val responseBody = response.body()
-        return responseBody!!
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.getGrupeZaPredmet(idPredmeta)
+            val responseBody = response.body()
+            return@withContext responseBody!!
+        }
     }
 
     suspend fun getUpisaneGrupe():List<Grupa>{
-        var response = ApiAdapter.retrofit.getGrupeZaStudenta()
-        val responseBody = response.body()
-        return responseBody!!
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.getGrupeZaStudenta()
+            val responseBody = response.body()
+            return@withContext responseBody!!
+        }
     }
 
     suspend fun upisiUGrupu(idGrupa:Int):Boolean{
-        var response = ApiAdapter.retrofit.upisiUGrupu(idGrupa)
-        val responseBody = response.body()
-        if (responseBody != null) {
-            return responseBody.dajPoruku().contains("je dodan u grupu");
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.upisiUGrupu(idGrupa)
+            val responseBody = response.body()
+            if (responseBody != null) {
+                return@withContext responseBody.dajPoruku().contains("je dodan u grupu");
+            }
+            return@withContext false;
         }
-        return false;
     }
 
 

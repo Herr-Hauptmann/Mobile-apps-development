@@ -1,18 +1,24 @@
 package ba.etf.rma21.projekat.data.repositories
 
 import ba.etf.rma21.projekat.data.models.KvizTaken
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 object TakeKvizRepository {
     suspend fun zapocniKviz(idKviza: Int): KvizTaken? {
-        var response = ApiAdapter.retrofit.zapoocniKvizZaStudenta(idKviza)
-        if (response.body()!!.student==null) //NE SIMPLIFIKOVATI!
-            return null;
-        return response.body();
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.zapoocniKvizZaStudenta(idKviza)
+            if (response.body()!!.student == null) //NE SIMPLIFIKOVATI!
+                return@withContext null;
+            return@withContext response.body();
+        }
     }
     suspend fun getPocetiKvizovi():List<KvizTaken>?{
-        var response = ApiAdapter.retrofit.dajPokusaje()
-        if (response.body()!!.isEmpty())
-            return null
-        return response.body();
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.dajPokusaje()
+            if (response.body()!!.isEmpty())
+                return@withContext null
+            return@withContext response.body();
+        }
     }
 }

@@ -3,6 +3,7 @@ package ba.etf.rma21.projekat
 
 import ba.etf.rma21.projekat.data.models.*
 import ba.etf.rma21.projekat.data.repositories.*
+import junit.framework.Assert.assertNotNull
 import junit.framework.Assert.assertNull
 
 import kotlinx.coroutines.Dispatchers
@@ -33,9 +34,18 @@ class MyUnitTest {
             var odgovor: String = response.body().toString()
         }
     }
+
+
     @Test
     fun a0_pripremiPocetak() = runBlocking {
         obrisi()
+    }
+
+    @Test
+    fun provjeraKvizIPredmetVeze() = runBlocking{
+        val kvizovi = KvizRepository.getAll()
+        val predmet = PredmetIGrupaRepository.getPredmetById(kvizovi[kvizovi.size-1].predmetId)
+        assertNotNull(predmet)
     }
 
     @Test

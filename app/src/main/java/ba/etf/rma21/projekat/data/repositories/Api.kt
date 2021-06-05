@@ -10,7 +10,7 @@ interface Api {
     @GET("/predmet")
     suspend fun getPredmeti(): Response<List<Predmet>>
     @GET("/predmet/{id}")
-    suspend fun getPredmet(): Response<Predmet>
+    suspend fun getPredmet(@Path("id") id : Int): Response<Predmet>
 
     //GRUPE
     @GET("/grupa")
