@@ -17,5 +17,18 @@ class GrupaViewModel {
             }
         }
     }
-
+    fun getGrupeByPredmet(idPredmeta : Int, onSuccess : (grupe : List<Grupa>)-> Unit, onError:()->Unit){
+        scope.launch{
+            when (val result = PredmetIGrupaRepository.getGrupeZaPredmet(idPredmeta)) {
+                else -> onSuccess.invoke(result)
+            }
+        }
+    }
+    fun upisiGrupu(idGrupe : Int, onSuccess : (uspjesno : Boolean) -> Unit, onError:()->Unit){
+        scope.launch{
+            when (val result = PredmetIGrupaRepository.upisiUGrupu(idGrupe)) {
+                else -> onSuccess.invoke(result)
+            }
+        }
+    }
 }

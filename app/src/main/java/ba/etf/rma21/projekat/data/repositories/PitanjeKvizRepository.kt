@@ -9,7 +9,7 @@ object PitanjeKvizRepository {
         return withContext(Dispatchers.IO) {
             var tijelo = ApiAdapter.retrofit.dajPitanja(idKviza).body()
             return@withContext tijelo
-
         }
     }
+
 }

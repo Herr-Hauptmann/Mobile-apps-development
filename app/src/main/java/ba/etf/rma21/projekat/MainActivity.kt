@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import ba.etf.rma21.projekat.fragments.FragmentKvizovi
+import ba.etf.rma21.projekat.fragments.FragmentPredmeti
 //import androidx.recyclerview.widget.RecyclerView
 //import ba.etf.rma21.projekat.fragments.FragmentKvizovi
 //import ba.etf.rma21.projekat.fragments.FragmentPredmeti
@@ -35,8 +36,7 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.kvizovi -> odaberiTrenutniFragment(FragmentKvizovi())
-                R.id.predmeti -> odaberiTrenutniFragment(FragmentKvizovi())
-//                R.id.predmeti -> odaberiTrenutniFragment(FragmentPredmeti())
+                R.id.predmeti -> odaberiTrenutniFragment(FragmentPredmeti())
             }
             true
         }

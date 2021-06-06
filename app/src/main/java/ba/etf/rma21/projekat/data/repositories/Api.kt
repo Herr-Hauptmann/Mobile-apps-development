@@ -44,12 +44,10 @@ interface Api {
     //ODGOVORI
     @GET("/student/{id}/kviztaken/{ktid}/odgovori")
     suspend fun dajOdgovore(@Path("ktid") ktid:Int, @Path("id") id : String = getHash()) : Response<List<Odgovor>>
-    @FormUrlEncoded
+
     @POST("/student/{id}/kviztaken/{ktid}/odgovor")
     suspend fun unesiOdgovor(@Path("ktid") ktid: Int,
-                             @Field("odgovor") odgovor : Int,
-                             @Field("pitanje") pitanjeId : Int,
-                             @Field("bodovi") bodovi : Int,
+                             @Body slanje : OdgovorSlanje,
                              @Path("id") id : String = getHash())
 
     //PITANJA

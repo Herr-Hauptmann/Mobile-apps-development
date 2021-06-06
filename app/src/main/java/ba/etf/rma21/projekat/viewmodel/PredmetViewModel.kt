@@ -41,8 +41,6 @@ class PredmetViewModel : ViewModel() {
     }
 
     fun restart(predmet: String, grupa:String){
-        posljednjaGrupa.value = grupa
-        posljednjiPredmet.value = predmet
         trenutnaGrupa.value = 0
         trenutniPredmet.value = 0
     }
@@ -71,6 +69,12 @@ class PredmetViewModel : ViewModel() {
         }
     }
 
-
+    fun getPredmetWithGodina(godina : Int, onSuccess: (predmet : List<Predmet> ) -> Unit, onError: () -> Unit){
+        scope.launch{
+            when (val result = PredmetIGrupaRepository.getPredmetByGodina(godina)) {
+                else -> onSuccess.invoke(result)
+            }
+        }
+    }
 
 }

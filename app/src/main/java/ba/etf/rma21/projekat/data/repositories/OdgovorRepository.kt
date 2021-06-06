@@ -1,6 +1,7 @@
 package ba.etf.rma21.projekat.data.repositories
 
 import ba.etf.rma21.projekat.data.models.Odgovor
+import ba.etf.rma21.projekat.data.models.OdgovorSlanje
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.math.roundToInt
@@ -32,7 +33,7 @@ object OdgovorRepository {
 
          val bodovi : Int = ((tacni.toDouble()/pitanja.size.toDouble()*100.0)).roundToInt()
          withContext(Dispatchers.IO) {
-             ApiAdapter.retrofit.unesiOdgovor(idKvizTaken, odgovor, idPitanje, bodovi)
+             ApiAdapter.retrofit.unesiOdgovor(idKvizTaken, OdgovorSlanje(odgovor, idPitanje, bodovi))
          }
         return bodovi
     }

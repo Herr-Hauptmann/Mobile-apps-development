@@ -65,5 +65,18 @@ object PredmetIGrupaRepository {
         }
     }
 
+    suspend fun getPredmetByGodina(godina : Int): List<Predmet>{
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.getPredmeti()
+            val responseBody = response.body()
+            var predmeti : MutableList<Predmet> = emptyList<Predmet>().toMutableList()
+            for (predmet in responseBody!!)
+            {
+                if (predmet.godina == godina)
+                    predmeti.add(predmet)
+            }
+            return@withContext predmeti!!
+        }
+    }
 
 }
