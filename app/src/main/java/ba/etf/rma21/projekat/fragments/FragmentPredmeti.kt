@@ -151,7 +151,6 @@ class FragmentPredmeti : Fragment() {
         dugme.setOnClickListener{
             modelGlobal.restart(nazivPredmeta, nazivGrupe)
             var model3 : GrupaViewModel = GrupaViewModel()
-            (context as MainActivity).odaberiTrenutniFragment(FragmentPoruka())
             model3.upisiGrupu(idGrupa[grupa-1], onSuccess = ::zavrsi, onError = ::nijeUspjelo)
         }
     }
@@ -161,6 +160,7 @@ class FragmentPredmeti : Fragment() {
         stringovi.add(getString(R.string.grupaSpinner))
         for (grupa in grupe){
             stringovi.add(grupa.naziv)
+            idGrupa.add(grupa.id)
         }
 
         popuniSpinner(odabirGrupe, stringovi)
@@ -186,7 +186,6 @@ class FragmentPredmeti : Fragment() {
     }
 
     fun nijeUspjelo(){
-        (context as MainActivity).odaberiTrenutniFragment(FragmentPoruka())
     }
 
     fun popuniSpinner(spinner: Spinner, lista: List<String>)
