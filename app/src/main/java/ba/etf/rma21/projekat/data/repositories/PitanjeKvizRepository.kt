@@ -5,9 +5,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 object PitanjeKvizRepository {
-    suspend fun getPitanja(idKviza:Int):List<Pitanje>{
+    suspend fun getPitanja(idKviza:Int): List<Pitanje>? {
         return withContext(Dispatchers.IO) {
-            return@withContext ApiAdapter.retrofit.dajPitanja(idKviza).body()!!
+            var tijelo = ApiAdapter.retrofit.dajPitanja(idKviza).body()
+            return@withContext tijelo
+
         }
     }
 }

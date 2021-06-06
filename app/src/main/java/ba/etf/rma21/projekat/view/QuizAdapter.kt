@@ -13,6 +13,7 @@ import ba.etf.rma21.projekat.R
 import ba.etf.rma21.projekat.data.models.Kviz
 import ba.etf.rma21.projekat.data.repositories.PredmetIGrupaRepository
 import ba.etf.rma21.projekat.viewmodel.PredmetViewModel
+import kotlinx.coroutines.Dispatchers
 import java.util.*
 
 class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
@@ -22,7 +23,6 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
             .inflate(R.layout.quiz_item, parent, false)
         return QuizViewHolder(view)
     }
-
 
     inner class QuizViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nazivPredmeta : TextView = itemView.findViewById(R.id.nazivPredmeta)
@@ -34,51 +34,55 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
     }
 
     override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {
-        val kviz:Kviz = kvizovi[position]
+//        val kviz:Kviz = kvizovi[position]
 
-        holder.nazivKviza.text = kviz.naziv
-        holder.nazivPredmeta.text = PredmetViewModel().getPredmetWithId(kviz.predmetId).
-            kviz.nazivPredmeta
+        holder.nazivKviza.text = "Nebitno"
+        holder.nazivPredmeta.text = "IM1"
+//        holder.datumKviza.text = "1.1.1999"
+        holder.trajanje.text = "30"
 
-        var datumZaPrikaz:Date
-        var boja:String
-        val danasnjiDatum :Date = StaticKviz.getCurrentDateTime()
-        if (kviz.osvojeniBodovi != null)
-        {
-            datumZaPrikaz = kviz.datumRada!!
-            boja = "plava"
-            holder.osvojeniBodovi.text = kviz.osvojeniBodovi.toString()
-        }
-        else if(kviz.datumPocetka < danasnjiDatum && kviz.datumKraj > danasnjiDatum)
-        {
-            datumZaPrikaz = kviz.datumKraj
-            boja = "zelena"
-            holder.osvojeniBodovi.text=""
-        }
-        else if(kviz.datumKraj < danasnjiDatum)
-        {
-            datumZaPrikaz = kviz.datumKraj
-            boja = "crvena"
-            holder.osvojeniBodovi.text=""
-        }
-        else
-        {
-            datumZaPrikaz = kviz.datumPocetka
-            boja = "zuta"
-            holder.osvojeniBodovi.text=""
-        }
+//        holder.nazivPredmeta.text = PredmetViewModel().getPredmetWithId(kviz.predmetId).
+//            kviz.nazivPredmeta
 
-        val dan = datumZaPrikaz!!.date
-        val mjesec = datumZaPrikaz!!.month
-        val godina = datumZaPrikaz!!.year
+//        var datumZaPrikaz:Date
+//        var boja:String
+//        val danasnjiDatum :Date = getCurrentDateTime()
+//        if (kviz.osvojeniBodovi != null)
+//        {
+//            datumZaPrikaz = kviz.datumRada!!
+//            boja = "plava"
+//            holder.osvojeniBodovi.text = kviz.osvojeniBodovi.toString()
+//        }
+//        if(kviz.datumPocetka < danasnjiDatum && kviz.datumKraj > danasnjiDatum)
+//        {
+//            datumZaPrikaz = kviz.datumKraj
+//            boja = "zelena"
+//            holder.osvojeniBodovi.text=""
+//        }
+//        else if(kviz.datumKraj < danasnjiDatum)
+//        {
+//            datumZaPrikaz = kviz.datumKraj
+//            boja = "crvena"
+//            holder.osvojeniBodovi.text=""
+//        }
+//        else
+//        {
+//            datumZaPrikaz = kviz.datumPocetka
+//            boja = "zuta"
+//            holder.osvojeniBodovi.text=""
+//        }
 
-        holder.datumKviza.text = "$dan.$mjesec.$godina"
-        holder.trajanje.text = kviz.trajanje.toString() + " min"
+//        val dan = datumZaPrikaz!!.date
+//        val mjesec = datumZaPrikaz!!.month
+//        val godina = datumZaPrikaz!!.year
 
-        val context : Context = holder.status.context
-        var id: Int = context.resources.getIdentifier(boja, "drawable", context.packageName)
-
-        holder.status.setImageResource(id)
+//        holder.datumKviza.text = "$dan.$mjesec.$godina"
+//        holder.trajanje.text = kviz.trajanje.toString() + " min"
+//
+//        val context : Context = holder.status.context
+//        var id: Int = context.resources.getIdentifier(boja, "drawable", context.packageName)
+//
+//        holder.status.setImageResource(id)
     }
 
     override fun getItemCount(): Int {
@@ -90,4 +94,9 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
         this.kvizovi = kvizovi.sorted();
         notifyDataSetChanged()
     }
+
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
+    }
+
 }

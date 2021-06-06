@@ -46,7 +46,7 @@ interface Api {
                              @Field("odgovor") odgovor : Int,
                              @Field("pitanje") pitanjeId : Int,
                              @Field("bodovi") bodovi : Int,
-                             @Path("id") id : String = getHash()) : Response<OdgovorPoruka>
+                             @Path("id") id : String = getHash())
 
     //PITANJA
     @GET("/kviz/{id}/pitanja")

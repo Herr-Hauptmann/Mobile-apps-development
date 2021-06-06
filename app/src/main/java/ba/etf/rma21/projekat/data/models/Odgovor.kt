@@ -4,7 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 class Odgovor(
     @SerializedName("id") var id : Int,
-    @SerializedName("odgovoreno") var odgovoreno : Int
+    @SerializedName("odgovoreno") var odgovoreno : Int,
+    @SerializedName("PitanjeId") var PitanjeId: Int,
+    @SerializedName("KvizTakenId") var KvizTakenId: Int
 ) {
 
 }
