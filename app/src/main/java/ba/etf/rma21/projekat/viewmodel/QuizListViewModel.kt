@@ -26,15 +26,27 @@ class QuizListViewModel {
             }
         }
     }
-    fun getBuduciKvizovi() : List<Kviz>
+    fun getBuduciKvizovi(onSuccess : (kvizovi : List<Kviz>)-> Unit, onError:()->Unit)
     {
-        return emptyList()
+        scope.launch{
+            when (val result = KvizRepository.getBuduci()) {
+                else -> onSuccess.invoke(result)
+            }
+        }
     }
-    fun getNeuradjeniKvizovi() : List<Kviz>
+    fun getNeuradjeniKvizovi(onSuccess : (kvizovi : List<Kviz>)-> Unit, onError:()->Unit)
     {
-        return emptyList()
+        scope.launch{
+            when (val result = KvizRepository.getNeRadjeni()) {
+                else -> onSuccess.invoke(result)
+            }
+        }
     }
-    fun getUradjeniKvizovi(): List<Kviz> {
-        return emptyList()
+    fun getUradjeniKvizovi(onSuccess : (kvizovi : List<Kviz>)-> Unit, onError:()->Unit){
+        scope.launch{
+            when (val result = KvizRepository.getRadjeni()) {
+                else -> onSuccess.invoke(result)
+            }
+        }
     }
 }

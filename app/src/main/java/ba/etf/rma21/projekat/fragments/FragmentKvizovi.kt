@@ -63,20 +63,31 @@ class FragmentKvizovi : Fragment() {
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-//                if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[0].toString())
-//                    kvizAdapter.updateQuizes(kvizViewModel.getMojiKvizovi())
+                if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[0].toString())
+                    kvizViewModel.getMojiKvizovi(
+                        onSuccess = ::uspjesno,
+                        onError = ::neuspjesno
+                    )
                 if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[1].toString()){
-//                    kvizViewModel.getSviKvizovi(
-//                        onSuccess = ::uspjesno,
-//                        onError = ::neuspjesno
-//                    )
+                    kvizViewModel.getSviKvizovi(
+                        onSuccess = ::uspjesno,
+                        onError = ::neuspjesno
+                    )
                 }
-//                if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[2].toString())
-//                    kvizAdapter.updateQuizes(kvizViewModel.getUradjeniKvizovi())
-//                if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[3].toString())
-//                    kvizAdapter.updateQuizes(kvizViewModel.getBuduciKvizovi())
-//                if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[4].toString())
-//                    kvizAdapter.updateQuizes(kvizViewModel.getNeuradjeniKvizovi())
+                if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[2].toString())
+                    kvizViewModel.getUradjeniKvizovi(
+                        onSuccess = ::uspjesno,
+                        onError = ::neuspjesno)
+                if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[3].toString())
+                    kvizViewModel.getBuduciKvizovi(
+                        onSuccess = ::uspjesno,
+                        onError = ::neuspjesno
+                    )
+                if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[4].toString())
+                    kvizViewModel.getBuduciKvizovi(
+                        onSuccess = ::uspjesno,
+                        onError = ::neuspjesno
+                    )
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {

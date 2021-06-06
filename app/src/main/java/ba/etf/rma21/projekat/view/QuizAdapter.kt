@@ -9,12 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ba.etf.rma21.projekat.R
 import ba.etf.rma21.projekat.data.models.Kviz
+import ba.etf.rma21.projekat.data.models.KvizTaken
 import ba.etf.rma21.projekat.data.models.Predmet
+import ba.etf.rma21.projekat.viewmodel.KvizTakenViewModel
 import ba.etf.rma21.projekat.viewmodel.PredmetViewModel
+import ba.etf.rma21.projekat.viewmodel.QuizListViewModel
 import java.util.*
 
 class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
     var globalniHolder : QuizViewHolder? = null
+    var globalniKviz : Kviz? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizViewHolder {
         val view = LayoutInflater
             .from(parent.context)
@@ -39,45 +43,16 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
         pronadjiPredmet(kviz, holder)
 
         var datumZaPrikaz:Date = kviz.datumPocetka
-        var boja:String = "zuta"
-        val danasnjiDatum :Date = getCurrentDateTime()
-//        if (kviz.osvojeniBodovi != null)
-//        {
-//            datumZaPrikaz = kviz.datumRada!!
-//            boja = "plava"
-//            holder.osvojeniBodovi.text = kviz.osvojeniBodovi.toString()
-//        }
-        if (kviz.datumKraj != null) {
-            if (kviz.datumPocetka < danasnjiDatum && kviz.datumKraj!! > danasnjiDatum) {
-                datumZaPrikaz = kviz.datumKraj!!
-                boja = "zelena"
-                holder.osvojeniBodovi.text = ""
-            } else if (kviz.datumKraj!! < danasnjiDatum) {
-                datumZaPrikaz = kviz.datumKraj!!
-                boja = "crvena"
-                holder.osvojeniBodovi.text = ""
-            }
-        }
-        else
-        {
-            datumZaPrikaz = kviz.datumPocetka
-            boja = "zuta"
-            holder.osvojeniBodovi.text=""
-        }
 
+        provjeriTip(kviz, holder)
 
         val dan = datumZaPrikaz!!.date
-        val mjesec = datumZaPrikaz!!.month
+        val mjesec = datumZaPrikaz!!.month+1
         val godina = datumZaPrikaz!!.year+1900
 
         holder.datumKviza.text = "$dan.$mjesec.$godina"
         holder.trajanje.text = kviz.trajanje.toString() + " min"
 
-        val context : Context = holder.status.context
-
-        var id: Int = context.resources.getIdentifier(boja, "drawable", context.packageName)
-
-        holder.status.setImageResource(id)
     }
 
     override fun getItemCount(): Int {
@@ -98,6 +73,34 @@ class QuizAdapter(private var kvizovi: List<Kviz>) : RecyclerView.Adapter<QuizAd
         val novi = PredmetViewModel();
         globalniHolder = holder;
         novi.getPredmetWithKviz(kviz.id, onSuccess = ::dajString, onError = ::neRadi)
+    }
+
+    private fun provjeriTip(kviz : Kviz, holder: QuizViewHolder){
+        val novi = KvizTakenViewModel();
+        globalniHolder = holder;
+        globalniKviz = kviz;
+        novi.getSviPokusaji(onSuccess = ::obleti, onError = ::neRadi)
+    }
+
+    private fun obleti(pokusaji : List<KvizTaken>?){
+        if (pokusaji == null)
+            return
+        for (pokusaj in pokusaji)
+            if (pokusaj.KvizId == globalniKviz!!.id){
+                globalniHolder!!.status.setImageResource(globalniHolder!!.status.context.resources.getIdentifier("plava", "drawable", globalniHolder!!.status.context.packageName))
+                globalniHolder!!.osvojeniBodovi.text = pokusaj.osvojeniBodovi.toString()
+                return
+            }
+        if (globalniKviz!!.datumPocetka >= getCurrentDateTime()){
+            if(globalniKviz!!.datumKraj == null || globalniKviz!!.datumKraj!! < getCurrentDateTime())
+                globalniHolder!!.status.setImageResource(globalniHolder!!.status.context.resources.getIdentifier("zelena", "drawable", globalniHolder!!.status.context.packageName))
+            else
+                globalniHolder!!.status.setImageResource(globalniHolder!!.status.context.resources.getIdentifier("crvena", "drawable", globalniHolder!!.status.context.packageName))
+        }
+        else
+            globalniHolder!!.status.setImageResource(globalniHolder!!.status.context.resources.getIdentifier("zuta", "drawable", globalniHolder!!.status.context.packageName))
+
+        globalniHolder!!.osvojeniBodovi.text = "";
     }
 
     private fun dajString(predmet : Predmet){
