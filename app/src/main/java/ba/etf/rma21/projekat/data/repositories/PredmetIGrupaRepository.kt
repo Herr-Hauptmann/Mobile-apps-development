@@ -57,5 +57,13 @@ object PredmetIGrupaRepository {
         }
     }
 
+    suspend fun getPredmetByKvizId(idKviz : Int):Predmet?{
+        return withContext(Dispatchers.IO) {
+            var grupa = ApiAdapter.retrofit.getGrupeByKvizId(idKviz).body() ?: return@withContext null;
+            var predmet = ApiAdapter.retrofit.getPredmet(grupa[grupa.size-1].PredmetId).body() ?: return@withContext null;
+            return@withContext predmet
+        }
+    }
+
 
 }

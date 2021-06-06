@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class Grupa(
     @SerializedName("id") val id : Int,
-    @SerializedName("naziv") val naziv : String) {
+    @SerializedName("naziv") val naziv : String,
+    @SerializedName("PredmetId") val PredmetId : Int){
     override operator fun equals(other: Any?): Boolean {
         if (other == null)
             return false;

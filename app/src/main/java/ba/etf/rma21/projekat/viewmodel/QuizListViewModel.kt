@@ -10,7 +10,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class QuizListViewModel {
-    private val scope : CoroutineScope = CoroutineScope(Dispatchers.IO)
+    private val scope : CoroutineScope = CoroutineScope(Job() + Dispatchers.Main)
     fun getSviKvizovi(onSuccess : (kvizovi : List<Kviz>)-> Unit, onError:()->Unit){
         scope.launch{
             when (val result = KvizRepository.getAll()) {
@@ -18,19 +18,23 @@ class QuizListViewModel {
             }
         }
     }
-//    fun getMojiKvizovi():List<Kviz>
-//    {
-//        return KvizRepository.getMyKvizes();
-//    }
-//    fun getBuduciKvizovi() : List<Kviz>
-//    {
-//        return KvizRepository.getFuture();
-//    }
-//    fun getNeuradjeniKvizovi() : List<Kviz>
-//    {
-//        return KvizRepository.getNotTaken();
-//    }
-//    fun getUradjeniKvizovi(): List<Kviz> {
-//        return KvizRepository.getDone()
-//    }
+    fun getMojiKvizovi(onSuccess : (kvizovi : List<Kviz>)-> Unit, onError:()->Unit)
+    {
+        scope.launch{
+            when (val result = KvizRepository.getUpisani()) {
+                else -> onSuccess.invoke(result)
+            }
+        }
+    }
+    fun getBuduciKvizovi() : List<Kviz>
+    {
+        return emptyList()
+    }
+    fun getNeuradjeniKvizovi() : List<Kviz>
+    {
+        return emptyList()
+    }
+    fun getUradjeniKvizovi(): List<Kviz> {
+        return emptyList()
+    }
 }

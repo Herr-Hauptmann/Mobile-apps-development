@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlin.reflect.KFunction1
 
 class PredmetViewModel : ViewModel() {
     val scope : CoroutineScope = CoroutineScope(Job() + Dispatchers.Main)
@@ -58,6 +59,14 @@ class PredmetViewModel : ViewModel() {
         scope.launch{
             when (val result = PredmetIGrupaRepository.getPredmetById(predmetId)) {
                 else -> onSuccess.invoke(result)
+            }
+        }
+    }
+
+    fun getPredmetWithKviz(kvizId: Int, onSuccess: (predmet : Predmet ) -> Unit, onError: () -> Unit){
+        scope.launch{
+            when (val result = PredmetIGrupaRepository.getPredmetByKvizId(kvizId)) {
+                else -> result?.let { onSuccess.invoke(it) }
             }
         }
     }

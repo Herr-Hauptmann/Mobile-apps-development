@@ -48,7 +48,6 @@ class FragmentKvizovi : Fragment() {
         kvizAdapter = QuizAdapter((listOf()))
         listaKvizova.adapter = kvizAdapter
 
-
         spinner = view.findViewById(R.id.filterKvizova)
         activity?.let {
             ArrayAdapter.createFromResource(
