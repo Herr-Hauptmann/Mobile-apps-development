@@ -38,6 +38,8 @@ class FragmentPredmeti : Fragment() {
     var idPredmeta : MutableList<Int> = emptyList<Int>().toMutableList()
     var idGrupa : MutableList<Int> = emptyList<Int>().toMutableList()
 
+    var nazivPredmeta : String = ""
+    var nazivGrupe : String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,9 +95,6 @@ class FragmentPredmeti : Fragment() {
                 dugme.isEnabled
         })
 
-
-
-
         odabirGodine.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 model.postaviGodinu(position)
@@ -122,6 +121,7 @@ class FragmentPredmeti : Fragment() {
                 model.postaviPredmet(position)
                  if(position != 0){
                     predmet = position
+                     nazivPredmeta = odabirPredmeta.selectedItem.toString()
                      val model2 : GrupaViewModel = GrupaViewModel()
                      model2.getGrupeByPredmet(idPredmeta[predmet-1], onSuccess = ::uspjeloGrupa, onError = ::nijeUspjelo)
                 }
@@ -140,6 +140,7 @@ class FragmentPredmeti : Fragment() {
                 model.postaviGrupu(position)
                 if (position!=0) {
                     grupa = position
+                    nazivGrupe = odabirGodine.selectedItem.toString()
                     dugme.isEnabled = true
                 }
             }
@@ -148,7 +149,9 @@ class FragmentPredmeti : Fragment() {
         }
 
         dugme.setOnClickListener{
+            modelGlobal.restart(nazivPredmeta, nazivGrupe)
             var model3 : GrupaViewModel = GrupaViewModel()
+            (context as MainActivity).odaberiTrenutniFragment(FragmentPoruka())
             model3.upisiGrupu(idGrupa[grupa-1], onSuccess = ::zavrsi, onError = ::nijeUspjelo)
         }
     }
@@ -183,6 +186,7 @@ class FragmentPredmeti : Fragment() {
     }
 
     fun nijeUspjelo(){
+        (context as MainActivity).odaberiTrenutniFragment(FragmentPoruka())
     }
 
     fun popuniSpinner(spinner: Spinner, lista: List<String>)
@@ -200,6 +204,6 @@ class FragmentPredmeti : Fragment() {
     }
 
     fun zavrsi(uspjelo : Boolean){
-            (context as MainActivity).odaberiTrenutniFragment(FragmentPoruka())
+        (context as MainActivity).odaberiTrenutniFragment(FragmentPoruka())
     }
 }

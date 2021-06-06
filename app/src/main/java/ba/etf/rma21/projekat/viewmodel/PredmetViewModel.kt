@@ -41,6 +41,8 @@ class PredmetViewModel : ViewModel() {
     }
 
     fun restart(predmet: String, grupa:String){
+        posljednjaGrupa.value = grupa
+        posljednjiPredmet.value = predmet
         trenutnaGrupa.value = 0
         trenutniPredmet.value = 0
     }
