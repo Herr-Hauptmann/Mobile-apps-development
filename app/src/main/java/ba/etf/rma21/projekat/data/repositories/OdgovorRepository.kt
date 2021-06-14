@@ -1,5 +1,6 @@
 package ba.etf.rma21.projekat.data.repositories
 
+import android.util.Log
 import ba.etf.rma21.projekat.data.models.Odgovor
 import ba.etf.rma21.projekat.data.models.OdgovorSlanje
 import kotlinx.coroutines.Dispatchers
@@ -9,7 +10,9 @@ import kotlin.math.roundToInt
 object OdgovorRepository {
     suspend fun getOdgovoriKviz(idKviza:Int):List<Odgovor>{
         return withContext(Dispatchers.IO) {
-            var response = ApiAdapter.retrofit.dajOdgovore(idKviza)
+            val poceti = ApiAdapter.retrofit.dajPokusaje().body();
+            val kviz = poceti!!.find{it.KvizId == idKviza} ?: return@withContext emptyList<Odgovor>();
+            var response = ApiAdapter.retrofit.dajOdgovore(kviz.id)
             val responseBody = response.body()
             return@withContext responseBody!!
         }
@@ -18,7 +21,7 @@ object OdgovorRepository {
     suspend fun postaviOdgovorKviz(idKvizTaken:Int,idPitanje:Int,odgovor:Int):Int {
 
          val radjeniKvizovi = TakeKvizRepository.getPocetiKvizovi() ?: return -1
-         val kvizId = radjeniKvizovi.find{it.id == idKvizTaken}?.id ?: return -1
+         val kvizId = radjeniKvizovi.find{it.id == idKvizTaken}?.KvizId ?: return -1
          val pitanja = PitanjeKvizRepository.getPitanja(kvizId)?:return -1
          val odgovori = getOdgovoriKviz(kvizId)
 
@@ -32,9 +35,10 @@ object OdgovorRepository {
          }
 
          val bodovi : Int = ((tacni.toDouble()/pitanja.size.toDouble()*100.0)).roundToInt()
-         withContext(Dispatchers.IO) {
-             ApiAdapter.retrofit.unesiOdgovor(idKvizTaken, OdgovorSlanje(odgovor, idPitanje, bodovi))
-         }
+        withContext(Dispatchers.IO) {
+             val nesto = ApiAdapter.retrofit.unesiOdgovor(idKvizTaken, OdgovorSlanje(odgovor, idPitanje, bodovi)).body()
+
+        }
         return bodovi
     }
 }

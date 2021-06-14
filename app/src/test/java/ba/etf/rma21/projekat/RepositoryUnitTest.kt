@@ -18,6 +18,7 @@ import org.junit.Test
 import org.junit.runners.MethodSorters
 import java.net.URL
 
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class RepositoryUnitTest {
     suspend fun obrisi(){
@@ -50,7 +51,6 @@ class RepositoryUnitTest {
         assertThat(grupe,CoreMatchers.notNullValue())
         assertThat(grupe?.size,CoreMatchers.equalTo(4))
     }
-
     @Test
     fun a3_getUpisaneGrupe() = runBlocking {
         var upisane = PredmetIGrupaRepository.getUpisaneGrupe()
@@ -141,4 +141,5 @@ class RepositoryUnitTest {
         var odgovorTProperties = listOf("id","odgovoreno")
         checkProperties(odgovorTProperties,odgovorProperties)
     }
+
 }

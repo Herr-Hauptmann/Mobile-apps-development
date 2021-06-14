@@ -4,6 +4,7 @@ import ba.etf.rma21.projekat.data.models.*
 import ba.etf.rma21.projekat.data.repositories.AccountRepository.getHash
 import retrofit2.Response
 import retrofit2.http.*
+import java.util.*
 
 interface Api {
     //PREDMETI
@@ -48,7 +49,7 @@ interface Api {
     @POST("/student/{id}/kviztaken/{ktid}/odgovor")
     suspend fun unesiOdgovor(@Path("ktid") ktid: Int,
                              @Body slanje : OdgovorSlanje,
-                             @Path("id") id : String = getHash())
+                             @Path("id") id : String = getHash()) : Response<OdgovorResponse>
 
     //PITANJA
     @GET("/kviz/{id}/pitanja")

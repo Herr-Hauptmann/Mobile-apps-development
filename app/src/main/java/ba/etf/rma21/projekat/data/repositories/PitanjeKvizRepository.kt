@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 object PitanjeKvizRepository {
     suspend fun getPitanja(idKviza:Int): List<Pitanje>? {
         return withContext(Dispatchers.IO) {
-            var tijelo = ApiAdapter.retrofit.dajPitanja(idKviza).body()
+            val tijelo = ApiAdapter.retrofit.dajPitanja(idKviza).body()
             return@withContext tijelo
         }
     }

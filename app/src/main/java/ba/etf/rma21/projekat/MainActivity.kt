@@ -49,6 +49,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val data = intent?.data.toString().orEmpty()
+        val hash = data.substringAfterLast("androidDone/").substringBeforeLast("/")
+    }
+
 
 
 }

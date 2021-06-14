@@ -3,6 +3,7 @@ package ba.etf.rma21.projekat.data.repositories
 import ba.etf.rma21.projekat.data.models.KvizTaken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.*
 
 object TakeKvizRepository {
     suspend fun zapocniKviz(idKviza: Int): KvizTaken? {
@@ -13,7 +14,7 @@ object TakeKvizRepository {
             return@withContext response.body();
         }
     }
-    suspend fun getPocetiKvizovi():List<KvizTaken>?{
+    suspend fun getPocetiKvizovi(): List<KvizTaken>?{
         return withContext(Dispatchers.IO) {
             var response = ApiAdapter.retrofit.dajPokusaje()
             if (response.body()!!.isEmpty())

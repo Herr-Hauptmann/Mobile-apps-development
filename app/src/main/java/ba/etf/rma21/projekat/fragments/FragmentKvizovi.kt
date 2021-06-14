@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -60,7 +61,8 @@ class FragmentKvizovi : Fragment() {
             }
         }
         spinner.setSelection(1)
-
+        spinner.setSelection(2)
+        spinner.setSelection(1)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 if (spinner.selectedItem.toString() == resources.getStringArray(R.array.spinnerOpcije)[0].toString())
