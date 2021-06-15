@@ -10,7 +10,7 @@ import java.util.*
 data class Kviz(
     @PrimaryKey @ColumnInfo(name="id")@SerializedName("id") val id : Int,
     @ColumnInfo(name="naziv")@SerializedName("naziv") var naziv: String,
-    @ColumnInfo(name="datumPocetak")@SerializedName("datumPocetak") var datumPocetka: Date,
+    @ColumnInfo(name="datumPocetka")@SerializedName("datumPocetak") var datumPocetka: Date,
     @ColumnInfo(name="datumKraj")@SerializedName("datumKraj") var datumKraj: Date?,
     @ColumnInfo(name="trajanje")@SerializedName("trajanje") var trajanje: Int,
     @ColumnInfo(name="predmetId")@SerializedName("predmetId") var predmetId: Int

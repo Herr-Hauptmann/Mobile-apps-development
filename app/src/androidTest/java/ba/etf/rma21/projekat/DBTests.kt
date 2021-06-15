@@ -28,7 +28,6 @@ import java.net.URL
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4::class)
 class DBTests {
-
     private val countOdgovor = "SELECT COUNT(*) AS broj_odgovora FROM Odgovor"
     private val countPredmet = "SELECT COUNT(*) AS broj_predmeta FROM Predmet"
     private val countGrupa = "SELECT COUNT(*) AS broj_grupa FROM Grupa"
@@ -78,7 +77,6 @@ class DBTests {
                 context, AppDatabase::class.java
             ).build()
             AppDatabase.setInstance(db)
-
         }
 
         @AfterClass @JvmStatic
@@ -89,9 +87,9 @@ class DBTests {
     }
 
     private fun executeCountAndCheck(query: String, column: String, value: Long) {
-        var rezultat = db.query(SimpleSQLiteQuery(query))
+        val rezultat = db.query(SimpleSQLiteQuery(query))
         rezultat.moveToNext()
-        var brojOdgovora = rezultat.getLong(rezultat.getColumnIndex(column))
+        val brojOdgovora = rezultat.getLong(rezultat.getColumnIndex(column))
         MatcherAssert.assertThat(brojOdgovora, `is`(equalTo(value)))
     }
 
@@ -109,22 +107,24 @@ class DBTests {
         pocentiHash = AccountRepository.getHash()
     }
 
-//    @Test
-//    fun t01_firstTest() = runBlocking {
-//        AccountRepository.postaviHash("testHash")
-//        MatcherAssert.assertThat(
-//            AccountRepository.getHash(),
-//            `is`(equalTo("testHash"))
-//        )
-//    }
-//    @Test
-//    fun t02_resetACHash() = runBlocking {
-//        AccountRepository.postaviHash(pocentiHash)
-//        MatcherAssert.assertThat(
-//            AccountRepository.getHash(),
-//            `is`(equalTo(pocentiHash))
-//        )
-//    }
+    @Test
+    fun t01_firstTest() = runBlocking {
+        AccountRepository.postaviHash("testHash")
+        MatcherAssert.assertThat(
+            AccountRepository.getHash(),
+            `is`(equalTo("testHash"))
+        )
+    }
+
+    @Test
+    fun t02_resetACHash() = runBlocking {
+        AccountRepository.postaviHash(pocentiHash)
+        MatcherAssert.assertThat(
+            AccountRepository.getHash(),
+            `is`(equalTo(pocentiHash))
+        )
+    }
+
 //    @Test
 //    fun t03_checkUpdateWorks() = runBlocking {
 //        val prije = DBRepository.updateNow()
@@ -153,21 +153,21 @@ class DBTests {
 
     @Test
     fun t06_tabeleImajuPotrebneKolone() = runBlocking {
-//        checkColumns(describePredmet, "Predmet")
+        checkColumns(describePredmet, "Predmet")
         checkColumns(describeAccount, "Account")
-//        checkColumns(describeGrupa, "Grupa")
-//        checkColumns(describeKviz, "Kviz")
-//        checkColumns(describeOdgovor, "Odgovor")
-//        checkColumns(describePitanje, "Pitanje")
+        checkColumns(describeGrupa, "Grupa")
+        checkColumns(describeKviz, "Kviz")
+        checkColumns(describeOdgovor, "Odgovor")
+        checkColumns(describePitanje, "Pitanje")
     }
 
-//    @Test
-//    @Throws(IOException::class)
-//    fun t07_checkIfDatabaseIsClear() = runBlocking {
-//        AccountRepository.postaviHash("testHash")
-//        executeCountAndCheck(countOdgovor, "broj_odgovora", 0)
-//        executeCountAndCheck(countPredmet, "broj_predmeta", 0)
-//        executeCountAndCheck(countKviz, "broj_kvizova", 0)
-//        executeCountAndCheck(countGrupa, "broj_grupa", 0)
-//    }
+    @Test
+    @Throws(IOException::class)
+    fun t07_checkIfDatabaseIsClear() = runBlocking {
+        AccountRepository.postaviHash("testHash")
+        executeCountAndCheck(countOdgovor, "broj_odgovora", 0)
+        executeCountAndCheck(countPredmet, "broj_predmeta", 0)
+        executeCountAndCheck(countKviz, "broj_kvizova", 0)
+        executeCountAndCheck(countGrupa, "broj_grupa", 0)
+    }
 }

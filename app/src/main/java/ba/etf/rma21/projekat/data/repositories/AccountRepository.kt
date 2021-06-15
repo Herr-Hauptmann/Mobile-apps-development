@@ -1,5 +1,6 @@
 package ba.etf.rma21.projekat.data.repositories
 import android.content.Context
+import ba.etf.rma21.projekat.data.AppDatabase
 import ba.etf.rma21.projekat.data.dao.AccountDAO
 import ba.etf.rma21.projekat.data.models.Account
 import kotlinx.coroutines.Dispatchers
@@ -18,17 +19,50 @@ class AccountRepository(private val accDao : AccountDAO){
         fun setContext(_context: Context){
             context=_context
         }
+
+        suspend fun postaviHash(acHash: String): Boolean {
+            companionHash = acHash
+            return withContext(Dispatchers.IO){
+                val vrijeme : Date = getCurrentDateTime()
+                val formatiranoVrijeme : String = formatirajVrijeme(vrijeme)
+                val accDao = AppDatabase.getInstance(context).accountDao()
+                accDao.izbrisiRacune()
+                accDao.dodajKorisnickiAcc(Account(1,acHash, formatiranoVrijeme))
+                return@withContext true;
+            }
+        }
+
+        private fun getCurrentDateTime(): Date {
+            return Calendar.getInstance().time
+        }
+
+        private fun formatirajVrijeme(datum: Date): String {
+            val godina = (datum.year + 1900).toString()
+            var mjesec = (datum.month+1).toString()
+            if (mjesec.length == 1)
+                mjesec = "0$mjesec";
+            var dan = (datum.day+1).toString()
+            if (dan.length == 1)
+                dan = "0$dan";
+            var sat = datum.hours.toString()
+            if (sat.length == 1)
+                sat = "0$sat";
+            var minut = datum.minutes.toString()
+            if (minut.length == 1)
+                minut = "0$minut";
+            var sekunda = datum.seconds.toString()
+            if (sekunda.length == 1)
+                sekunda = "0$sekunda";
+            return ("$godina-$mjesec-${dan}T$sat:$minut:$sekunda")
+        }
     }
-    var acHash: String = "8861bc6f-c600-4d3a-93e8-fd12ef85c979"
-    var id : Int = 105;
 
     private fun setLocalHash(hash : String){
-        acHash = hash;
         companionHash = hash;
     }
 
 
-    suspend fun postaviHash(acHash: String): Boolean {
+    suspend fun staviHash(acHash: String): Boolean {
         return withContext(Dispatchers.IO){
             val vrijeme : Date = getCurrentDateTime()
             val formatiranoVrijeme : String = formatirajVrijeme(vrijeme)

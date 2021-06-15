@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         val repo = AccountRepository(dao)
         val scope : CoroutineScope = CoroutineScope(Job() + Dispatchers.IO)
         scope.launch{
-            repo.postaviHash(hash!!);
+            repo.staviHash(hash!!);
         }
     }
 }

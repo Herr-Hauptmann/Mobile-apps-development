@@ -1,15 +1,23 @@
 package ba.etf.rma21.projekat.data
 
+import ba.etf.rma21.projekat.data.models.Converters
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ba.etf.rma21.projekat.data.dao.AccountDAO
+import androidx.room.TypeConverters
+import ba.etf.rma21.projekat.data.dao.*
 import ba.etf.rma21.projekat.data.models.*
-//Kviz::class, Pitanje::class,Odgovor::class, Grupa::class,Predmet::class,
-@Database(entities = [Account::class], version = 1,exportSchema = false)
+//
+@Database(entities = [Account::class, Grupa::class, Kviz::class, Pitanje::class,Odgovor::class, Predmet::class], version = 1,exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun accountDao() : AccountDAO
+    abstract fun grupaDao() : GrupaDAO
+    abstract fun kvizDao() : KvizDAO
+    abstract fun pitanjeDao() : PitanjeDAO
+    abstract fun odgovorDao() : OdgovorDAO
+    abstract fun predmetDao() : PredmetDAO
 
     companion object {
         private var INSTANCE: AppDatabase? = null
