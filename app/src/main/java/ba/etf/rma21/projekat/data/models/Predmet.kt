@@ -8,8 +8,8 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "Predmet")
 data class Predmet(
     @PrimaryKey @ColumnInfo(name="id") @SerializedName("id") val id : Int,
-    @SerializedName("naziv") val naziv: String,
-    @SerializedName("godina") val godina: Int) {
+    @ColumnInfo(name="naziv") @SerializedName("naziv") val naziv: String,
+    @ColumnInfo(name="godina") @SerializedName("godina") val godina: Int) {
     override operator fun equals(other: Any?): Boolean {
         if (other == null)
             return false;
