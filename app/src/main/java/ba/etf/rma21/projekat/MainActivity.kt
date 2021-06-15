@@ -53,8 +53,11 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         val data = intent?.data.toString().orEmpty()
         val hash = data.substringAfterLast("androidDone/").substringBeforeLast("/")
+//        val dao = AppDatabase.getInstance().accountDao()
+//        val repo = AccountRepository(dao)
+//        val scope : CoroutineScope = CoroutineScope(Job() + Dispatchers.IO)
+//        scope.launch{
+//            repo.postaviHash(hash);
+//        }
     }
-
-
-
 }

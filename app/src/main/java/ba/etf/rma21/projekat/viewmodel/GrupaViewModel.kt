@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlin.collections.List
 
 class GrupaViewModel {
     val scope : CoroutineScope = CoroutineScope(Job() + Dispatchers.Main)

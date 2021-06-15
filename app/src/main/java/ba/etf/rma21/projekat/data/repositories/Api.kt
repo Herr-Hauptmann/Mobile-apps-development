@@ -1,7 +1,6 @@
 package ba.etf.rma21.projekat.data.repositories
 
 import ba.etf.rma21.projekat.data.models.*
-import ba.etf.rma21.projekat.data.repositories.AccountRepository.getHash
 import retrofit2.Response
 import retrofit2.http.*
 import java.util.*
@@ -23,9 +22,9 @@ interface Api {
     @GET("/predmet/{id}/grupa")
     suspend fun getGrupeZaPredmet(@Path("id") idPredmeta : Int) : Response <List<Grupa>>
     @GET("/student/{id}/grupa")
-    suspend fun getGrupeZaStudenta(@Path("id") hashStudenta: String = getHash()) : Response<List<Grupa>>
+    suspend fun getGrupeZaStudenta(@Path("id") hashStudenta: String = AccountRepository.getHash()) : Response<List<Grupa>>
     @POST("/grupa/{gid}/student/{id}")
-    suspend fun upisiUGrupu(@Path("gid") idGrupa:Int, @Path("id") id : String = getHash()) : Response<Poruka>
+    suspend fun upisiUGrupu(@Path("gid") idGrupa:Int, @Path("id") id : String = AccountRepository.getHash()) : Response<Poruka>
 
     //KVIZOVI
     @GET("/kviz")
@@ -37,19 +36,19 @@ interface Api {
 
     //KVIZ TAKEN
     @POST("/student/{id}/kviz/{kid}")
-    suspend fun zapoocniKvizZaStudenta(@Path("kid") kvizId : Int, @Path("id") hashStudenta: String = getHash())
+    suspend fun zapoocniKvizZaStudenta(@Path("kid") kvizId : Int, @Path("id") hashStudenta: String = AccountRepository.getHash())
     : Response<KvizTaken>
     @GET("/student/{id}/kviztaken")
-    suspend fun dajPokusaje(@Path("id") id : String = getHash()) : Response<List<KvizTaken>>
+    suspend fun dajPokusaje(@Path("id") id : String = AccountRepository.getHash()) : Response<List<KvizTaken>>
 
     //ODGOVORI
     @GET("/student/{id}/kviztaken/{ktid}/odgovori")
-    suspend fun dajOdgovore(@Path("ktid") ktid:Int, @Path("id") id : String = getHash()) : Response<List<Odgovor>>
+    suspend fun dajOdgovore(@Path("ktid") ktid:Int, @Path("id") id : String = AccountRepository.getHash()) : Response<List<Odgovor>>
 
     @POST("/student/{id}/kviztaken/{ktid}/odgovor")
     suspend fun unesiOdgovor(@Path("ktid") ktid: Int,
                              @Body slanje : OdgovorSlanje,
-                             @Path("id") id : String = getHash()) : Response<OdgovorResponse>
+                             @Path("id") id : String = AccountRepository.getHash()) : Response<OdgovorResponse>
 
     //PITANJA
     @GET("/kviz/{id}/pitanja")
