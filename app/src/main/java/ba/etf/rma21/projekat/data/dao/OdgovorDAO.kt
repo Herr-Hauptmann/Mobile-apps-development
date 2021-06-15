@@ -15,6 +15,9 @@ interface OdgovorDAO {
     @Query("SELECT max(id) FROM Odgovor")
     suspend fun getNajveciId() : Int
 
+    @Query("SELECT * FROM Odgovor o where o.KvizTakenId=:ktid AND o.PitanjeId=:pid")
+    suspend fun getDupliOdgovor(ktid : Int, pid : Int) : Odgovor?
+
     @Query("SELECT * FROM Odgovor WHERE id = :odgovorId")
     suspend fun getOdgovorById(odgovorId : Int) : Odgovor
 

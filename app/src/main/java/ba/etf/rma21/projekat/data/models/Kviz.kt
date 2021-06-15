@@ -13,7 +13,8 @@ data class Kviz(
     @ColumnInfo(name="datumPocetka")@SerializedName("datumPocetak") var datumPocetka: Date,
     @ColumnInfo(name="datumKraj")@SerializedName("datumKraj") var datumKraj: Date?,
     @ColumnInfo(name="trajanje")@SerializedName("trajanje") var trajanje: Int,
-    @ColumnInfo(name="predmetId")@SerializedName("predmetId") var predmetId: Int
+    @ColumnInfo(name="predmetId")@SerializedName("predmetId") var predmetId: Int,
+    @ColumnInfo(name="predan") var predan: Boolean = false,
 ) : Comparable<Kviz>{
     override fun compareTo(kviz:Kviz): Int {
         if (kviz.datumPocetka == null || this.datumPocetka == null)

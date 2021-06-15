@@ -40,8 +40,14 @@ data class OdgovorRepository(private val dao : OdgovorDAO) {
                     val dao = AppDatabase.getInstance(context).odgovorDao()
                     var posljednji: Int? = dao.getNajveciId()
                     if (posljednji == null)
-                        posljednji = 0;
-                    dao.dodajOdgovor(Odgovor(posljednji + 1, idKvizTaken, idPitanje, odgovor))
+                            posljednji = 0;
+                    else {
+                        if (Odgovor(posljednji, idKvizTaken, idPitanje, odgovor) != dao.getOdgovorById(posljednji))
+                            dao.dodajOdgovor(Odgovor(posljednji + 1, idKvizTaken, idPitanje, odgovor))
+                    }
+                    if (posljednji == 0)
+                        dao.dodajOdgovor(Odgovor(posljednji + 1, idKvizTaken, idPitanje, odgovor))
+
                 } catch (e: Exception)
                 {
                     uspjelo = false;
@@ -66,28 +72,8 @@ data class OdgovorRepository(private val dao : OdgovorDAO) {
 
             return ((tacni.toDouble()/pitanja.size.toDouble()*100.0)).roundToInt()
         }
-        suspend fun postaviOdgovorKvizWeb(idKvizTaken:Int,idPitanje:Int,odgovor:Int):Int {
-
-             val radjeniKvizovi = TakeKvizRepository.getPocetiKvizovi() ?: return -1
-             val kvizId = radjeniKvizovi.find{it.id == idKvizTaken}?.KvizId ?: return -1
-             val pitanja = PitanjeKvizRepository.getPitanja(kvizId)?:return -1
-             val odgovori = getOdgovoriKviz(kvizId)
-
-             var tacni : Int = 0;
-             for(pitanje in pitanja){
-                 if (pitanje.id == idPitanje && pitanje.tacan == odgovor)
-                     tacni++
-                 for (odgovor in odgovori)
-                    if (odgovor.PitanjeId == pitanje.id && odgovor.odgovoreno == pitanje.tacan)
-                        tacni++
-             }
-
-             val bodovi : Int = ((tacni.toDouble()/pitanja.size.toDouble()*100.0)).roundToInt()
-            withContext(Dispatchers.IO) {
-                 val nesto = ApiAdapter.retrofit.unesiOdgovor(idKvizTaken, OdgovorSlanje(odgovor, idPitanje, bodovi)).body()
-
-            }
-            return bodovi
+        suspend fun predajOdgovore(idKviz : Int):Int {
+            return 1;
         }
     }
 }
