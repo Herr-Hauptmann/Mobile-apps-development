@@ -4,7 +4,6 @@ import ba.etf.rma21.projekat.data.dao.AccountDAO
 import ba.etf.rma21.projekat.data.models.Account
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
 import java.util.*
 
 class AccountRepository(private val accDao : AccountDAO){
@@ -31,13 +30,36 @@ class AccountRepository(private val accDao : AccountDAO){
 
     suspend fun postaviHash(acHash: String): Boolean {
         return withContext(Dispatchers.IO){
+            val vrijeme : Date = getCurrentDateTime()
+            val formatiranoVrijeme : String = formatirajVrijeme(vrijeme)
             setLocalHash(acHash)
-            val sad = Calendar.getInstance().time
-            var sdf = SimpleDateFormat("yyyy-mm-ddThh:mm:ss")
-            sdf.format(sad).toString()
             accDao.izbrisiRacune()
-            accDao.dodajKorisnickiAcc(Account(1,acHash, sdf.toString()))
+            accDao.dodajKorisnickiAcc(Account(1,acHash, formatiranoVrijeme))
             return@withContext true;
         }
+    }
+
+    private fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
+    }
+
+    private fun formatirajVrijeme(datum: Date): String {
+        val godina = (datum.year + 1900).toString()
+        var mjesec = (datum.month+1).toString()
+        if (mjesec.length == 1)
+            mjesec = "0$mjesec";
+        var dan = (datum.day+1).toString()
+        if (dan.length == 1)
+            dan = "0$dan";
+        var sat = datum.hours.toString()
+        if (sat.length == 1)
+            sat = "0$sat";
+        var minut = datum.minutes.toString()
+        if (minut.length == 1)
+            minut = "0$minut";
+        var sekunda = datum.seconds.toString()
+        if (sekunda.length == 1)
+            sekunda = "0$sekunda";
+        return ("$godina-$mjesec-${dan}T$sat:$minut:$sekunda")
     }
 }

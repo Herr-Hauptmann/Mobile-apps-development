@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "account")
 data class Account(
-    @PrimaryKey val uid: Int,
+    @PrimaryKey @ColumnInfo(name = "uid") val uid: Int,
     @ColumnInfo(name = "acHash") @SerializedName("acHash") var acHash:String,
     @ColumnInfo(name = "lastUpdate") @SerializedName("lastUpdate") var lastUpdate:String) {
 }

@@ -14,13 +14,13 @@ class PredmetViewModel : ViewModel() {
     val scope : CoroutineScope = CoroutineScope(Job() + Dispatchers.Main)
 
     val trenutnaGodina : MutableLiveData<Int> by lazy{
-        MutableLiveData<Int>(0)
+        MutableLiveData<Int>()
     }
     val trenutniPredmet : MutableLiveData<Int> by lazy{
-        MutableLiveData<Int>(0)
+        MutableLiveData<Int>()
     }
     val trenutnaGrupa : MutableLiveData<Int> by lazy{
-        MutableLiveData<Int>(0)
+        MutableLiveData<Int>()
     }
 
     val posljednjiPredmet : MutableLiveData<String> by lazy{

@@ -16,9 +16,9 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class DeepLinkingTest {
-
     @get:Rule
     val intentsTestRule = IntentsTestRule<MainActivity>(MainActivity::class.java,false,false)
+
     @Test
     fun otvaraSeAktivnost() = runBlocking{
         var intent = Intent(Intent.ACTION_VIEW)
