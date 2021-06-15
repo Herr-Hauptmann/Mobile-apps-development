@@ -137,12 +137,12 @@ class DBTests {
         assertThat(poslije, equalTo(true))
     }
 
-//    @Test
-//    fun t04_postaviOdgovor() = runBlocking {
-//        val postotak = OdgovorRepository.postaviOdgovorKviz( ktid, 1, 0)
-//        assertThat(postotak, equalTo(50))
-//        executeCountAndCheck(countOdgovor, "broj_odgovora", 1)
-//    }
+    @Test
+    fun t04_postaviOdgovor() = runBlocking {
+        val postotak = OdgovorRepository.postaviOdgovorKviz( ktid, 1, 0)
+        assertThat(postotak, equalTo(50))
+        executeCountAndCheck(countOdgovor, "broj_odgovora", 1)
+    }
 
 //    @Test
 //    fun t05_ponovljeniOdgovorSeNeUpisuje() = runBlocking {
