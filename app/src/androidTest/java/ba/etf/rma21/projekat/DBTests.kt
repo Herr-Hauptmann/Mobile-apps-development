@@ -125,25 +125,25 @@ class DBTests {
         )
     }
 
-//    @Test
-//    fun t03_checkUpdateWorks() = runBlocking {
-//        val prije = DBRepository.updateNow()
-//        assertThat(prije, equalTo(false))
-//        PredmetIGrupaRepository.upisiUGrupu(1)
-//        val kt = TakeKvizRepository.zapocniKviz(1)
-//        assertThat(kt, notNullValue())
-//        ktid = kt!!.id
-//        val poslije = DBRepository.updateNow()
-//        assertThat(poslije, equalTo(true))
-//    }
-//
+    @Test
+    fun t03_checkUpdateWorks() = runBlocking {
+        val prije = DBRepository.updateNow()
+        assertThat(prije, equalTo(false))
+        PredmetIGrupaRepository.upisiUGrupu(1)
+        val kt = TakeKvizRepository.zapocniKviz(1)
+        assertThat(kt, notNullValue())
+        ktid = kt!!.id
+        val poslije = DBRepository.updateNow()
+        assertThat(poslije, equalTo(true))
+    }
+
 //    @Test
 //    fun t04_postaviOdgovor() = runBlocking {
 //        val postotak = OdgovorRepository.postaviOdgovorKviz( ktid, 1, 0)
 //        assertThat(postotak, equalTo(50))
 //        executeCountAndCheck(countOdgovor, "broj_odgovora", 1)
 //    }
-//
+
 //    @Test
 //    fun t05_ponovljeniOdgovorSeNeUpisuje() = runBlocking {
 //        val postotak = OdgovorRepository.postaviOdgovorKviz( ktid, 1, 0)

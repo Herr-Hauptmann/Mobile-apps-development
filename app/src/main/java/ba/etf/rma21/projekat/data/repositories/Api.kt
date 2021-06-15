@@ -53,4 +53,8 @@ interface Api {
     //PITANJA
     @GET("/kviz/{id}/pitanja")
     suspend fun dajPitanja(@Path("id") id : Int) : Response<List<Pitanje>>
+
+    //UPDATE
+    @GET("/account/{hash}/lastUpdate")
+    suspend fun dajUpdate(@Path("hash") hash : String = AccountRepository.getHash(), @Query("date") datum : String) : Response<UpdateResponse>
 }

@@ -9,7 +9,7 @@ interface AccountDAO {
         suspend fun getAccount(): Account
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
-        suspend fun dodajKorisnickiAcc(korisnik: Account)
+        suspend fun dodajKorisnickiAcc(korisnik : Account)
 
         @Query("DELETE FROM Account")
         suspend fun izbrisiRacune()

@@ -36,7 +36,7 @@ class AccountRepository(private val accDao : AccountDAO){
             return Calendar.getInstance().time
         }
 
-        private fun formatirajVrijeme(datum: Date): String {
+        public fun formatirajVrijeme(datum: Date): String {
             val godina = (datum.year + 1900).toString()
             var mjesec = (datum.month+1).toString()
             if (mjesec.length == 1)
@@ -70,6 +70,12 @@ class AccountRepository(private val accDao : AccountDAO){
             accDao.izbrisiRacune()
             accDao.dodajKorisnickiAcc(Account(1,acHash, formatiranoVrijeme))
             return@withContext true;
+        }
+    }
+
+    suspend fun getAccount() : Account{
+        return withContext(Dispatchers.IO) {
+            return@withContext accDao.getAccount()
         }
     }
 
